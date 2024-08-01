@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:keepScreenOn="true"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/g7_segment_7a"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/_000_0"
+            android:textColor="#B3FF0000"
+            android:textSize="150sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/expo"
+            android:layout_width="0dp"
+            android:layout_height="101dp"
+            android:backgroundTint="#33FF0000"
+            android:text="@string/button"
+            android:textColor="#80FF0000"
+            android:textColorLink="#FF0000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/reset"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="4"
+            app:layout_constraintStart_toEndOf="@+id/focus" />
+
+        <Button
+            android:id="@+id/focus"
+            android:layout_width="0dp"
+            android:layout_height="101dp"
+            android:backgroundTint="#33FF0000"
+            android:onClick="focus"
+            android:text="@string/foc"
+            android:textColor="#80FF0000"
+            android:textColorLink="#FF0000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/expo"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="0dp"
+            android:layout_height="101dp"
+            android:backgroundTint="#33FF0000"
+            android:onClick="reset"
+            android:text="@string/reset"
+            android:textColor="#80FF0000"
+            android:textColorLink="#FF0000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@+id/expo" />
+
+        <TableLayout
+            android:id="@+id/tableStrips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time">
+
+            <TableRow
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/stNumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/stnumber"
+                    android:textColor="#80FF0000"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/stEach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/each"
+                    android:textColor="#80FF0000"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/stTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/total"
+                    android:textColor="#80FF0000"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="1"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st1Par"
+                    android:layout_width="89dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="1"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st1Ac"
+                    android:layout_width="89dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="1"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="2"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st2Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="2"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st2Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="2"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="3"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st3Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="3"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st3Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="3"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="4"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="4"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st4Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="4"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st4Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="4"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="5"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st5Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="5"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st5Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="5"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="6"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st66"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="6"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st6Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="6"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st6Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="6"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="7"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st77"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="7"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st7Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="7"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st7Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="7"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="8"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st88"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="8"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st8Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="8"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st8Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="8"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="9"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st99"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="9"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st9Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="9"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st9Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="9"
+                    android:onClick="stripselectA"
+                    android:gravity="center"
+                    android:longClickable="true"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/st10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="10"
+                android:onClick="stripselect">
+
+                <TextView
+                    android:id="@+id/st100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:gravity="center"
+                    android:text="10"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st10Par"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="10"
+                    android:onClick="stripselect"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/st10Ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape"
+                    android:fontFamily="@font/g7_segment_7a"
+                    android:tag="10"
+                    android:onClick="stripselectA"
+                    android:longClickable="true"
+                    android:gravity="center"
+                    android:textColor="#80FF0000"
+                    android:textSize="34sp" />
+            </TableRow>
+
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/strips"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:onClick="stripClick"
+            android:text="@string/strips"
+            android:textColor="#809B9B9B"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mode" />
+
+        <TextView
+            android:id="@+id/numstrips"
+            android:layout_width="32dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape"
+            android:gravity="center"
+            android:text="@string/_1"
+            android:textColor="#80FF0000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/strips"
+            app:layout_constraintTop_toBottomOf="@+id/nmode" />
+
+        <TextView
+            android:id="@+id/stops"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center"
+            android:onClick="stopClick"
+            android:text="@string/stops"
+            android:textColor="#809B9B9B"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/strips" />
+
+        <TextView
+            android:id="@+id/method"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:onClick="methodClick"
+            android:text="@string/method"
+            android:textColor="#809B9B9B"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stops" />
+
+        <TextView
+            android:id="@+id/numstops"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="17dp"
+            android:background="@drawable/shape"
+            android:gravity="center"
+            android:text="@string/nstops"
+            android:textColor="#80FF0000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/stops"
+            app:layout_constraintTop_toBottomOf="@+id/numstrips" />
+
+        <TextView
+            android:id="@+id/nmethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="42dp"
+            android:background="@drawable/shape"
+            android:gravity="left|center_vertical"
+            android:text="@string/manual"
+            android:textColor="#80FF0000"
+            android:textSize="16sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/method" />
+
+        <TextView
+            android:id="@+id/delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="42dp"
+            android:gravity="center"
+            android:text="@string/delay"
+            android:textColor="#809B9B9B"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nmethod" />
+
+        <EditText
+            android:id="@+id/ndelay"
+            android:layout_width="63dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:autofillHints="@string/_0"
+            android:backgroundTint="#33FF0000"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/_0"
+            android:inputType="number"
+            android:text="@string/_0"
+            android:textColor="#80FF0000"
+            android:textColorHint="#80FF0000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/unit"
+            app:layout_constraintTop_toBottomOf="@+id/delay" />
+
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center"
+            android:text="ms"
+            android:textColor="#809B9B9B"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/delay" />
+
+        <TextView
+            android:id="@+id/nmode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape"
+            android:text="@string/timer"
+            android:textColor="#80FF0000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/mode"
+            app:layout_constraintTop_toBottomOf="@+id/time" />
+
+        <TextView
+            android:id="@+id/mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="modeClick"
+            android:text="@string/mode"
+            android:textColor="#809B9B9B"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time" />
+
+        <android.widget.Button
+            android:id="@+id/upb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#33FF0000"
+            android:gravity="center"
+            android:onClick="upTimer"
+            android:text="@string/up"
+            android:textColor="#80FF0000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/baseTime" />
+
+        <android.widget.Button
+            android:id="@+id/downb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#33FF0000"
+            android:gravity="center"
+            android:onClick="dowTimer"
+            android:text="@string/down"
+            android:textColor="#80FF0000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upb" />
+
+        <TextView
+            android:id="@+id/baseTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="34dp"
+            android:textColor="#80FF0000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ndelay" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DisparaTimer</string>
+    <string name="button">INICIA</string>
+    <string name="button1">PAUSA</string>
+    <string name="button2">SIGUE</string>
+    <string name="reset">RT</string>
+    <string name="foc">FO</string>
+    <string name="each">CADA</string>
+    <string name="total">TOTAL</string>
+    <string name="strips">" TIRASP"</string>
+    <string name="mode">MODO</string>
+    <string name="timer">TIMER</string>
+    <string name="strip">" TIRAP"</string>
+    <string name="wait">ESPERA</string>
+    <string name="stops">PASOS</string>
+    <string name="method">METODO</string>
+    <string name="delay">RETARDO</string>
+    <string name="automatic">AUTO</string>
+    <string name="manual">MANU</string>
+    <string name="single">SINGLE</string>
+</resources>
