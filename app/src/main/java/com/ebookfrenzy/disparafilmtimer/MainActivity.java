@@ -609,6 +609,8 @@ public class MainActivity extends AppCompatActivity {
             double ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
 
             binding.nmode.setText(getResources().getString(R.string.strip));
+            binding.stTotal.setText(R.string.total);
+            binding.stEach.setText(R.string.each);
 
             binding.upb.setVisibility(View.INVISIBLE);
             binding.upb.setEnabled(false);
@@ -618,11 +620,14 @@ public class MainActivity extends AppCompatActivity {
             binding.baseTime.setEnabled(false);
             binding.baseTime.setText("");
 
+
             stripsd = stripcount(ex, numstrips, stopsi[k]);
             strippaint(stripsd, numstrips);
             stripselect1(numstr);
         } else {
             binding.nmode.setText(getResources().getString(R.string.timer));
+            binding.stTotal.setText(R.string.strip);
+            binding.stEach.setText(R.string.memo);
             binding.upb.setVisibility(View.VISIBLE);
             binding.upb.setEnabled(true);
             binding.downb.setVisibility(View.VISIBLE);
