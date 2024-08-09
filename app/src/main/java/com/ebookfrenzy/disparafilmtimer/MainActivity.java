@@ -629,7 +629,7 @@ public class MainActivity extends AppCompatActivity {
             binding.stTotal.setText(R.string.strip);
             binding.stEach.setText(R.string.memo);
             binding.upb.setVisibility(View.VISIBLE);
-            binding.upb.setEnabled(true);
+            binding.upb.setEnabled(true) ;
             binding.downb.setVisibility(View.VISIBLE);
             binding.downb.setEnabled(true);
             binding.baseTime.setVisibility(View.VISIBLE);
