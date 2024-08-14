@@ -2,10 +2,12 @@ package com.ebookfrenzy.disparafilmtimer;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.net.wifi.WifiManager;
 import android.net.DhcpInfo;
@@ -128,7 +130,10 @@ public class MainActivity extends AppCompatActivity {
                 } else if (binding.expo.getText().equals(getString(R.string.button2))) {
                     starTimer(ex, getString(R.string.button1), delay);
                 }
-            } else startimer2(getString(R.string.wait), delay);
+            } else{
+                binding.expo.setEnabled(false);
+                startimer2(getString(R.string.wait), delay);
+            }
         });
     }
 
@@ -186,40 +191,48 @@ public class MainActivity extends AppCompatActivity {
             int x = (int) m.getX(i);
             int y = (int) m.getY(i);
             int action = m.getActionMasked();
-            //int actionIndex = m.getActionIndex();
+            //int actionIndex =
+            DisplayMetrics metrics = getResources().getDisplayMetrics();
+            int dpi = metrics.densityDpi;
 
-            if (action == MotionEvent.ACTION_UP) {
-                if (x < 180) {
-                    if (y <= 398 && y >= 280) {
+            Rect bounds = new Rect();
+            binding.time.getLineBounds(0,bounds);
+            int ce = bounds.centerX();
+            int ceY=bounds.centerY();
+            int bot=bounds.bottom;
+
+            if (action == MotionEvent.ACTION_DOWN) {
+                if (x > ce-(460*dpi/440) && x < ce-(360*dpi/440)) {
+                    if (y <= bot && y >= ceY) {
                         if (cent >= 1) cent = cent - 1;
-                    } else if (y < 280) {
+                    } else if (y < ceY) {
                         if (cent < 9) cent = cent + 1;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > 275 && x < 445) {
-                    if (y <= 398 && y >= 280) {
+                if (x > ce-(265*dpi/440) && x < ce-(95*dpi/440)) {
+                    if (y <= bot && y >= ceY) {
                         if (dece >= 1) dece = dece - 1;
-                    } else if (y < 280) {
+                    } else if (y < ceY) {
                         if (dece < 9) dece = dece + 1;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > 535 && x < 683) {
-                    if (y <= 398 && y >= 280) {
+                if (x > ce && x < ce+(100*dpi/440)) {
+                    if (y <= bot && y >= ceY) {
                         if (unid >= 1) unid = unid - 1;
-                    } else if (y < 280) {
+                    } else if (y < ceY) {
                         if (unid < 9) unid = unid + 1;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > 850) {
-                    if (y <= 398 && y >= 280) {
+                if (x > ce+(290*dpi/440) && x < ce+(390*dpi/440)) {
+                    if (y <= bot && y >= ceY) {
                         if (deci >= 1) deci = deci - 1;
-                    } else if (y < 280) {
+                    } else if (y < ceY) {
                         if (deci < 9) deci = deci + 1;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
@@ -684,6 +697,7 @@ public class MainActivity extends AppCompatActivity {
                 stripselect1(1);
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                 binding.expo.setText(getString(R.string.button));
+                binding.expo.setEnabled(true);
                 binding.focus.setEnabled(true);
                 binding.reset.setEnabled(true);
             }
@@ -707,6 +721,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }
@@ -731,6 +746,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }
@@ -755,6 +771,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }
@@ -779,6 +796,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }
@@ -803,6 +821,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }
@@ -828,6 +847,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }
@@ -851,6 +871,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }
@@ -874,6 +895,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }
@@ -897,6 +919,7 @@ public class MainActivity extends AppCompatActivity {
                     stripselect1(1);
                     binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                     binding.expo.setText(getString(R.string.button));
+                    binding.expo.setEnabled(true);
                     binding.focus.setEnabled(true);
                     binding.reset.setEnabled(true);
                 }

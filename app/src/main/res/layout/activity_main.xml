@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/time"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/g7_segment_7a"
@@ -563,13 +563,13 @@
             android:id="@+id/strips"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:onClick="stripClick"
             android:text="@string/strips"
             android:textColor="#809B9B9B"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mode" />
 
@@ -577,8 +577,8 @@
             android:id="@+id/numstrips"
             android:layout_width="32dp"
             android:layout_height="38dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/shape"
             android:gravity="center"
             android:text="@string/_1"
@@ -597,21 +597,21 @@
             android:onClick="stopClick"
             android:text="@string/stops"
             android:textColor="#809B9B9B"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/strips" />
 
         <TextView
             android:id="@+id/method"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="12dp"
             android:gravity="center"
             android:onClick="methodClick"
             android:text="@string/method"
             android:textColor="#809B9B9B"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stops" />
 
@@ -620,7 +620,7 @@
             android:layout_width="wrap_content"
             android:layout_height="38dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/shape"
             android:gravity="center"
             android:text="@string/nstops"
@@ -633,27 +633,26 @@
             android:id="@+id/nmethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="42dp"
+            android:layout_marginEnd="32dp"
             android:background="@drawable/shape"
             android:gravity="left|center_vertical"
             android:text="@string/manual"
             android:textColor="#80FF0000"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/method" />
 
         <TextView
             android:id="@+id/delay"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="42dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="12dp"
             android:gravity="center"
             android:text="@string/delay"
             android:textColor="#809B9B9B"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nmethod" />
 
@@ -693,7 +692,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/shape"
             android:text="@string/timer"
             android:textColor="#80FF0000"
@@ -710,7 +709,7 @@
             android:onClick="modeClick"
             android:text="@string/mode"
             android:textColor="#809B9B9B"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time" />
 
