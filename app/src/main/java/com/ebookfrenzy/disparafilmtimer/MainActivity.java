@@ -3,6 +3,8 @@ package com.ebookfrenzy.disparafilmtimer;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -47,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
     public int numstr = 1;
     int[] stopsi = {2, 3, 4, 6, 8};
     double[] stripsd;
-    String[] memo = new String[10];
+    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+    String[] memo = new String[11];
+    String memo2 = "750";
     CountDownTimer timer;
     CountDownTimer timer2;
     CountDownTimer timer3;
@@ -113,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
         binding.st9Ac.setOnLongClickListener(v -> acTimer(9));
         binding.st10Ac.setOnLongClickListener(v -> acTimer(10));
 
+        binding.reset.setOnLongClickListener(v -> erase());
+
         binding.expo.setOnClickListener(v -> {
             int delay = Integer.parseInt(binding.ndelay.getText().toString());
 
@@ -140,8 +146,14 @@ public class MainActivity extends AppCompatActivity {
     void starTimer(long ex, String st, int delay) {
 
         timer = new CountDownTimer(ex, 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -205,8 +217,10 @@ public class MainActivity extends AppCompatActivity {
                 if (x > ce-(460*dpi/440) && x < ce-(360*dpi/440)) {
                     if (y <= bot && y >= ceY) {
                         if (cent >= 1) cent = cent - 1;
+                        else cent=9;
                     } else if (y < ceY) {
                         if (cent < 9) cent = cent + 1;
+                        else cent=0;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
@@ -214,8 +228,10 @@ public class MainActivity extends AppCompatActivity {
                 if (x > ce-(265*dpi/440) && x < ce-(95*dpi/440)) {
                     if (y <= bot && y >= ceY) {
                         if (dece >= 1) dece = dece - 1;
+                        else dece=9;
                     } else if (y < ceY) {
                         if (dece < 9) dece = dece + 1;
+                        else dece=0;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
@@ -223,8 +239,10 @@ public class MainActivity extends AppCompatActivity {
                 if (x > ce && x < ce+(100*dpi/440)) {
                     if (y <= bot && y >= ceY) {
                         if (unid >= 1) unid = unid - 1;
+                        else unid=9;
                     } else if (y < ceY) {
                         if (unid < 9) unid = unid + 1;
+                        else unid=0;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
@@ -232,8 +250,10 @@ public class MainActivity extends AppCompatActivity {
                 if (x > ce+(290*dpi/440) && x < ce+(390*dpi/440)) {
                     if (y <= bot && y >= ceY) {
                         if (deci >= 1) deci = deci - 1;
+                        else deci=9;
                     } else if (y < ceY) {
                         if (deci < 9) deci = deci + 1;
+                        else deci=0;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
@@ -257,10 +277,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reset(View view) {
-        double ex = (double) time0 / 1000;
-        binding.time.setText(String.format(Locale.US, "%05.1f", ex));
-        binding.expo.setText(getString(R.string.button));
-        binding.focus.setEnabled(true);
+        if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))){
+            double ex = (double) time0 / 1000;
+            binding.time.setText(String.format(Locale.US, "%05.1f", ex));
+            binding.expo.setText(getString(R.string.button));
+            binding.focus.setEnabled(true);
+        }
+        else{
+            stripselect1(1);
+        }
     }
 
     InetAddress IP() {
@@ -297,6 +322,7 @@ public class MainActivity extends AppCompatActivity {
             DatagramSocket socket = channel.socket();
             InetAddress addr = IP();
             DatagramPacket packet = new DatagramPacket(msg, msg.length, addr, port);
+            toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP,35);
             socket.send(packet);
             socket.close();
         } catch (IOException e) {
@@ -547,6 +573,25 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    public boolean erase(){
+        TableLayout tblLayout = binding.tableStrips;
+
+        if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
+           for(int i=1;i<11;i++) {
+               TableRow row = (TableRow) tblLayout.getChildAt(i);
+               TextView strip1 = (TextView) row.getChildAt(1);
+               TextView strip2 = (TextView) row.getChildAt(2);
+               strip1.setText(R.string._000_0);
+               strip1.setTextColor(0xff000000);
+               strip2.setText(R.string._000_0);
+               strip2.setTextColor(0xff000000);
+           }
+            binding.baseTime.setText("");
+            return true;
+        }
+        return false;
+    }
+
 
     public void upTimer(View view) {
         String[] stops = getResources().getStringArray(R.array.stops);
@@ -613,6 +658,9 @@ public class MainActivity extends AppCompatActivity {
                 strip2.setLongClickable(false);
             }
 
+            memo[10]=binding.ndelay.getText().toString();
+            binding.ndelay.setText(memo2);
+
             numstr = 1;
             int cent = Integer.parseInt(expo.substring(0, 1));
             int dece = Integer.parseInt(expo.substring(1, 2));
@@ -632,11 +680,17 @@ public class MainActivity extends AppCompatActivity {
             binding.baseTime.setVisibility(View.INVISIBLE);
             binding.baseTime.setEnabled(false);
             binding.baseTime.setText("");
+            binding.method.setEnabled(true);
+            binding.nmethod.setEnabled(true);
+            binding.method.setTextColor(Color.parseColor("#809B9B9B"));
+            binding.nmethod.setTextColor(Color.parseColor("#80FF0000"));
+            binding.nmethod.setBackgroundResource(R.drawable.shape);
 
 
             stripsd = stripcount(ex, numstrips, stopsi[k]);
             strippaint(stripsd, numstrips);
             stripselect1(numstr);
+
         } else {
             binding.nmode.setText(getResources().getString(R.string.timer));
             binding.stTotal.setText(R.string.strip);
@@ -665,6 +719,8 @@ public class MainActivity extends AppCompatActivity {
                     strip2.setTextColor(Color.parseColor("#80FF0000"));
                     if(i == numstr) {
                         binding.time.setText(strip2.getText());
+                        expo= binding.time.getText().toString();
+                        n = expo.length();
                         int cent = Integer.parseInt(expo.substring(0, 1));
                         int dece = Integer.parseInt(expo.substring(1, 2));
                         int unid = Integer.parseInt(expo.substring(2, 3));
@@ -676,6 +732,13 @@ public class MainActivity extends AppCompatActivity {
                     strip2.setText(R.string._000_0);
                 }
             }
+            memo2=binding.ndelay.getText().toString();
+            binding.ndelay.setText(memo[10]);
+            binding.method.setEnabled(false);
+            binding.nmethod.setEnabled(false);
+            binding.method.setTextColor(0xff000000);
+            binding.nmethod.setTextColor(0xff000000);
+            binding.nmethod.setBackgroundColor(0xff000000);
         }
     }
 
@@ -688,8 +751,14 @@ public class MainActivity extends AppCompatActivity {
         binding.reset.setEnabled(false);
 
         timer10 = new CountDownTimer((long) ((stripsd[9] - stripsd[8]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -704,8 +773,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer9 = new CountDownTimer((long) ((stripsd[8] - stripsd[7]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -729,8 +804,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer8 = new CountDownTimer((long) ((stripsd[7] - stripsd[6]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -754,8 +835,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer7 = new CountDownTimer((long) ((stripsd[6] - stripsd[5]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -779,8 +866,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer6 = new CountDownTimer((long) ((stripsd[5] - stripsd[4]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -804,8 +897,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer5 = new CountDownTimer((long) ((stripsd[4] - stripsd[3]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -830,8 +929,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         timer4 = new CountDownTimer((long) ((stripsd[3] - stripsd[2]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -855,8 +960,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer3 = new CountDownTimer((long) ((stripsd[2] - stripsd[1]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -879,8 +990,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer2 = new CountDownTimer((long) ((stripsd[1] - stripsd[0]) * 1000), 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
@@ -903,8 +1020,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer = new CountDownTimer((long) stripsd[0] * 1000, 100) {
+            int n;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                n=n+1;
+                if (n==11) {
+                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
+                    n=0;
+                }
             }
 
             public void onFinish() {
