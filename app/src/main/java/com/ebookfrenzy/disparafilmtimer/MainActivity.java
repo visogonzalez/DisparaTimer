@@ -120,7 +120,9 @@ public class MainActivity extends AppCompatActivity {
         binding.reset.setOnLongClickListener(v -> erase());
 
         binding.expo.setOnClickListener(v -> {
-            int delay = Integer.parseInt(binding.ndelay.getText().toString());
+            String dela = binding.ndelay.getText().toString();
+            if (dela.isEmpty()) dela ="0";
+            int delay = Integer.parseInt(dela);
 
             if (!binding.nmethod.getText().toString().equals("AUTO") || binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
                 String ini = binding.time.getText().toString();
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -755,7 +757,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -777,7 +779,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -808,7 +810,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -839,7 +841,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -870,7 +872,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -901,7 +903,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -933,7 +935,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -964,7 +966,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -994,7 +996,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -1024,7 +1026,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==11) {
+                if (n==10) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
