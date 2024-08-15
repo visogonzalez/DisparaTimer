@@ -569,7 +569,7 @@
             android:gravity="center"
             android:onClick="stripClick"
             android:text="@string/strips"
-            android:textColor="#809B9B9B"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mode" />
@@ -580,11 +580,10 @@
             android:layout_height="38dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/shape"
             android:gravity="center"
             android:onClick="stripClick"
             android:text="@string/_1"
-            android:textColor="#80FF0000"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/strips"
             app:layout_constraintTop_toBottomOf="@+id/nmode" />
@@ -612,7 +611,7 @@
             android:gravity="center"
             android:onClick="methodClick"
             android:text="@string/method"
-            android:textColor="#809B9B9B"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stops" />
@@ -637,7 +636,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/shape"
             android:gravity="left|center_vertical"
             android:onClick="methodClick"
             android:text="@string/automatic"

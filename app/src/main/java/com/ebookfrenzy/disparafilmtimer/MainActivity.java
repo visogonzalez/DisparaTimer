@@ -149,10 +149,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer = new CountDownTimer(ex, 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m<ex) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -688,6 +690,13 @@ public class MainActivity extends AppCompatActivity {
             binding.nmethod.setTextColor(Color.parseColor("#80FF0000"));
             binding.nmethod.setBackgroundResource(R.drawable.shape);
 
+            binding.numstrips.setEnabled(true);
+            binding.strips.setEnabled(true);
+            binding.strips.setTextColor(Color.parseColor("#809B9B9B"));
+            binding.numstrips.setTextColor(Color.parseColor("#80FF0000"));
+            binding.numstrips.setBackgroundResource(R.drawable.shape);
+
+
 
             stripsd = stripcount(ex, numstrips, stopsi[k]);
             strippaint(stripsd, numstrips);
@@ -741,6 +750,12 @@ public class MainActivity extends AppCompatActivity {
             binding.method.setTextColor(0xff000000);
             binding.nmethod.setTextColor(0xff000000);
             binding.nmethod.setBackgroundColor(0xff000000);
+            binding.numstrips.setEnabled(false);
+            binding.strips.setEnabled(false);
+            binding.strips.setTextColor(0xff000000);
+            binding.numstrips.setTextColor(0xff000000);
+            binding.numstrips.setBackgroundColor(0xff000000);
+
         }
     }
 
@@ -754,10 +769,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer10 = new CountDownTimer((long) ((stripsd[9] - stripsd[8]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m <(long) ((stripsd[9] - stripsd[8]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -776,10 +793,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer9 = new CountDownTimer((long) ((stripsd[8] - stripsd[7]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m <(long) ((stripsd[8] - stripsd[7]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -807,10 +826,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer8 = new CountDownTimer((long) ((stripsd[7] - stripsd[6]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m <(long) ((stripsd[7] - stripsd[6]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -838,10 +859,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer7 = new CountDownTimer((long) ((stripsd[6] - stripsd[5]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m < (long) ((stripsd[6] - stripsd[5]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -869,10 +892,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer6 = new CountDownTimer((long) ((stripsd[5] - stripsd[4]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m < (long) ((stripsd[5] - stripsd[4]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -900,10 +925,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer5 = new CountDownTimer((long) ((stripsd[4] - stripsd[3]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m <(long) ((stripsd[4] - stripsd[3]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -932,10 +959,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer4 = new CountDownTimer((long) ((stripsd[3] - stripsd[2]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m <(long) ((stripsd[3] - stripsd[2]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -963,10 +992,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer3 = new CountDownTimer((long) ((stripsd[2] - stripsd[1]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m<(long) ((stripsd[2] - stripsd[1]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -993,10 +1024,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer2 = new CountDownTimer((long) ((stripsd[1] - stripsd[0]) * 1000), 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m< (long) ((stripsd[1] - stripsd[0]) * 1000)) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
@@ -1023,10 +1056,12 @@ public class MainActivity extends AppCompatActivity {
 
         timer = new CountDownTimer((long) stripsd[0] * 1000, 100) {
             int n;
+            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n=n+1;
-                if (n==10) {
+                m=m+100;
+                if (n==10 && m< (long) stripsd[0] * 1000) {
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
                     n=0;
                 }
