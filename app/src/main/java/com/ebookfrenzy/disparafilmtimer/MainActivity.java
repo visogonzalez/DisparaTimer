@@ -464,14 +464,15 @@ public class MainActivity extends AppCompatActivity {
         stripselect1(numstr);
     }
 
-    public void stripselect1(int numstr) {
+    public void stripselect1(int numstri) {
         String strips = binding.numstrips.getText().toString();
         int numstrips = Integer.parseInt(strips);
         TableLayout tblLayout = binding.tableStrips;
-        TableRow row = (TableRow) tblLayout.getChildAt(numstr);
+        TableRow row = (TableRow) tblLayout.getChildAt(numstri);
         TextView strip0 = (TextView) row.getChildAt(0);
         TextView strip1 = (TextView) row.getChildAt(1);
         TextView strip2 = (TextView) row.getChildAt(2);
+        numstr=numstri;
 
         if (!strip1.getText().toString().isEmpty() && !strip1.getText().toString().equals(getString(R.string._000_0))) {
             binding.time.setText(strip1.getText());
@@ -491,7 +492,7 @@ public class MainActivity extends AppCompatActivity {
             strip1.setTextColor(0xff000000);
             strip2.setTextColor(0xff000000);
 
-            for (int k = 0; k < numstr; k++) {
+            for (int k = 0; k < numstri; k++) {
                 row = (TableRow) tblLayout.getChildAt(k);
                 strip0 = (TextView) row.getChildAt(0);
                 strip1 = (TextView) row.getChildAt(1);
@@ -502,7 +503,7 @@ public class MainActivity extends AppCompatActivity {
                 strip2.setTextColor(Color.parseColor("#80FF0000"));
             }
 
-            for (int k = numstr + 1; k <= numstrips + 1; k++) {
+            for (int k = numstri + 1; k <= numstrips + 1; k++) {
                 row = (TableRow) tblLayout.getChildAt(k);
                 strip0 = (TextView) row.getChildAt(0);
                 strip1 = (TextView) row.getChildAt(1);

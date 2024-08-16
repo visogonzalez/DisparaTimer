@@ -639,7 +639,7 @@
             android:gravity="left|center_vertical"
             android:onClick="methodClick"
             android:text="@string/automatic"
-            android:textColor="#80FF0000"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
