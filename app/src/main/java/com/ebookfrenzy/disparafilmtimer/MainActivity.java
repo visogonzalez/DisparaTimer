@@ -49,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
     public int numstr = 1;
     int[] stopsi = {2, 3, 4, 6, 8};
     double[] stripsd;
-    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 75);
     String[] memo = new String[11];
     String memo2 = "750";
+    String memo3 = "0";
     CountDownTimer timer;
     CountDownTimer timer2;
     CountDownTimer timer3;
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     CountDownTimer timer8;
     CountDownTimer timer9;
     CountDownTimer timer10;
+
+    public Boolean Focus = false;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -117,30 +120,51 @@ public class MainActivity extends AppCompatActivity {
         binding.st9Ac.setOnLongClickListener(v -> acTimer(9));
         binding.st10Ac.setOnLongClickListener(v -> acTimer(10));
 
+
+        view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            Rect r = new Rect();
+            view.getWindowVisibleDisplayFrame(r);
+            int heightDiff = view.getRootView().getHeight() - (r.bottom - r.top);
+            if (heightDiff > 100) { // if more than 100 pixels, its probably a keyboard...
+                if (binding.ndelay != null) {
+                    binding.ndelay.setCursorVisible(true);
+                }
+            } else {
+                if (binding.ndelay != null) {
+                    binding.ndelay.setCursorVisible(false);
+                }
+            }
+        });
+
         binding.reset.setOnLongClickListener(v -> erase());
 
         binding.expo.setOnClickListener(v -> {
             String dela = binding.ndelay.getText().toString();
-            if (dela.isEmpty()) dela ="0";
+            if (dela.isEmpty()) dela = "0";
             int delay = Integer.parseInt(dela);
 
-            if (!binding.nmethod.getText().toString().equals("AUTO") || binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-                String ini = binding.time.getText().toString();
-                double ex1 = Double.parseDouble(ini) * 1000;
-                long ex = (int) ex1;
-                if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
-                    starTimer(ex, getString(R.string.button1), delay);
-                } else if (binding.expo.getText().equals(getString(R.string.button1))) {
-                    timer.cancel();
-                    paquete();
-                    binding.expo.setText(getString(R.string.button2));
-                    binding.reset.setEnabled(true);
-                } else if (binding.expo.getText().equals(getString(R.string.button2))) {
-                    starTimer(ex, getString(R.string.button1), delay);
+            if (!binding.time.getText().toString().equals(getString(R.string._000_0))) {
+
+                if (!binding.nmethod.getText().toString().equals("AUTO") || binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
+                    String ini = binding.time.getText().toString();
+                    double ex1 = Double.parseDouble(ini) * 1000;
+                    long ex = (int) ex1;
+                    toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
+                    if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
+                        starTimer(ex, getString(R.string.button1), delay);
+                    } else if (binding.expo.getText().equals(getString(R.string.button1))) {
+                        timer.cancel();
+                        paquete();
+                        binding.expo.setText(getString(R.string.button2));
+                        binding.reset.setEnabled(true);
+                    } else if (binding.expo.getText().equals(getString(R.string.button2))) {
+                        starTimer(ex, getString(R.string.button1), delay);
+                    }
+                } else {
+                    binding.expo.setEnabled(false);
+                    toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
+                    startimer2(getString(R.string.wait), delay);
                 }
-            } else{
-                binding.expo.setEnabled(false);
-                startimer2(getString(R.string.wait), delay);
             }
         });
     }
@@ -150,13 +174,14 @@ public class MainActivity extends AppCompatActivity {
         timer = new CountDownTimer(ex, 100) {
             int n;
             long m;
+
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m<ex) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
+                n = n + 1;
+                m = m + 100;
+                if (n == 10 && m < ex && binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
+                    toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP, 50);
+                    n = 0;
                 }
             }
 
@@ -166,10 +191,14 @@ public class MainActivity extends AppCompatActivity {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time0) / 1000));
                 binding.focus.setEnabled(true);
                 binding.reset.setEnabled(true);
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 int numstrips = Integer.parseInt(binding.numstrips.getText().toString());
                 if (!binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
                     if (numstr < numstrips + 1) {
                         numstr = numstr + 1;
+                        stripselect1(numstr);
+                    } else {
+                        numstr = 1;
                         stripselect1(numstr);
                     }
                 }
@@ -212,52 +241,52 @@ public class MainActivity extends AppCompatActivity {
             int dpi = metrics.densityDpi;
 
             Rect bounds = new Rect();
-            binding.time.getLineBounds(0,bounds);
+            binding.time.getLineBounds(0, bounds);
             int ce = bounds.centerX();
-            int ceY=bounds.centerY();
-            int bot=bounds.bottom;
+            int ceY = bounds.centerY();
+            int bot = bounds.bottom;
 
             if (action == MotionEvent.ACTION_DOWN) {
-                if (x > ce-(460*dpi/440) && x < ce-(360*dpi/440)) {
+                if (x > ce - (460 * dpi / 440) && x < ce - (360 * dpi / 440)) {
                     if (y <= bot && y >= ceY) {
                         if (cent >= 1) cent = cent - 1;
-                        else cent=9;
+                        else cent = 9;
                     } else if (y < ceY) {
                         if (cent < 9) cent = cent + 1;
-                        else cent=0;
+                        else cent = 0;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce-(265*dpi/440) && x < ce-(95*dpi/440)) {
+                if (x > ce - (265 * dpi / 440) && x < ce - (95 * dpi / 440)) {
                     if (y <= bot && y >= ceY) {
                         if (dece >= 1) dece = dece - 1;
-                        else dece=9;
+                        else dece = 9;
                     } else if (y < ceY) {
                         if (dece < 9) dece = dece + 1;
-                        else dece=0;
+                        else dece = 0;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce && x < ce+(100*dpi/440)) {
+                if (x > ce && x < ce + (100 * dpi / 440)) {
                     if (y <= bot && y >= ceY) {
                         if (unid >= 1) unid = unid - 1;
-                        else unid=9;
+                        else unid = 9;
                     } else if (y < ceY) {
                         if (unid < 9) unid = unid + 1;
-                        else unid=0;
+                        else unid = 0;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce+(290*dpi/440) && x < ce+(390*dpi/440)) {
+                if (x > ce + (290 * dpi / 440) && x < ce + (390 * dpi / 440)) {
                     if (y <= bot && y >= ceY) {
                         if (deci >= 1) deci = deci - 1;
-                        else deci=9;
+                        else deci = 9;
                     } else if (y < ceY) {
                         if (deci < 9) deci = deci + 1;
-                        else deci=0;
+                        else deci = 0;
                     }
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
@@ -277,17 +306,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void focus(View view) {
-        paquete();
+        toneGen1.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50);
+        if(!Focus){
+            paquete();
+            Focus=true;
+            binding.focus.setTextColor(Color.parseColor("#80FF0000"));
+            binding.expo.setEnabled(false);
+            binding.expo.setTextColor(0xff000000);
+            binding.reset.setEnabled(false);
+            binding.reset.setTextColor(0xff000000);
+        }
+        else{
+            paquete();
+            Focus=false;
+            binding.focus.setTextColor(0xff000000);
+            binding.expo.setEnabled(true);
+            binding.expo.setTextColor(Color.parseColor("#80FF0000"));
+            binding.reset.setEnabled(true);
+            binding.reset.setTextColor(Color.parseColor("#80FF0000"));
+        }
     }
 
     public void reset(View view) {
-        if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))){
+        toneGen1.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50);
+        if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
             double ex = (double) time0 / 1000;
             binding.time.setText(String.format(Locale.US, "%05.1f", ex));
             binding.expo.setText(getString(R.string.button));
             binding.focus.setEnabled(true);
-        }
-        else{
+        } else {
             stripselect1(1);
         }
     }
@@ -326,7 +373,6 @@ public class MainActivity extends AppCompatActivity {
             DatagramSocket socket = channel.socket();
             InetAddress addr = IP();
             DatagramPacket packet = new DatagramPacket(msg, msg.length, addr, port);
-            toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP,35);
             socket.send(packet);
             socket.close();
         } catch (IOException e) {
@@ -350,7 +396,7 @@ public class MainActivity extends AppCompatActivity {
     public void strippaint(double[] stripsd, int numstrips) {
         TableLayout tblLayout = binding.tableStrips;
         String method = binding.nmethod.getText().toString();
-        if (!method.equals("SINGLE")) {
+        if (!method.equals(getResources().getString(R.string.single))) {
             for (int i = 1; i <= numstrips + 1; i++) {
                 TableRow row = (TableRow) tblLayout.getChildAt(i);
                 TextView strip1 = (TextView) row.getChildAt(1);
@@ -450,9 +496,14 @@ public class MainActivity extends AppCompatActivity {
             String[] method = getResources().getStringArray(R.array.method);
             int kk = Arrays.asList(method).indexOf(binding.nmethod.getText().toString());
 
+            if (kk ==1) memo2=binding.ndelay.getText().toString();
+            else memo3=binding.ndelay.getText().toString();
+
             if (kk < method.length - 1) kk = kk + 1;
             else kk = 0;
             binding.nmethod.setText(method[kk]);
+            if (kk ==1) binding.ndelay.setText(memo2);
+            else binding.ndelay.setText(memo3);
             stripsd = stripcount(ex, numstrips, stopsi[k]);
             strippaint(stripsd, numstrips);
             stripselect1(numstr);
@@ -472,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
         TextView strip0 = (TextView) row.getChildAt(0);
         TextView strip1 = (TextView) row.getChildAt(1);
         TextView strip2 = (TextView) row.getChildAt(2);
-        numstr=numstri;
+        numstr = numstri;
 
         if (!strip1.getText().toString().isEmpty() && !strip1.getText().toString().equals(getString(R.string._000_0))) {
             binding.time.setText(strip1.getText());
@@ -557,10 +608,18 @@ public class MainActivity extends AppCompatActivity {
         TableRow row = (TableRow) tblLayout.getChildAt(i);
         TextView strip1 = (TextView) row.getChildAt(1);
         if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-            strip1.setText(binding.time.getText());
-            if (!binding.time.getText().toString().equals(getString(R.string._000_0)))
+            if(binding.time.getText().toString().equals(strip1.getText().toString())) {
+                strip1.setText(R.string._000_0);
+                strip1.setTextColor(0xff000000);
+            }
+            else if (!binding.time.getText().toString().equals(getString(R.string._000_0))) {
                 strip1.setTextColor(Color.parseColor("#80FF0000"));
-            else strip1.setTextColor(0xff000000);
+                strip1.setText(binding.time.getText());
+            }
+            else{
+                strip1.setTextColor(0xff000000);
+                strip1.setText(binding.time.getText());
+            }
             return true;
         }
         return false;
@@ -578,19 +637,19 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public boolean erase(){
+    public boolean erase() {
         TableLayout tblLayout = binding.tableStrips;
 
         if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-           for(int i=1;i<11;i++) {
-               TableRow row = (TableRow) tblLayout.getChildAt(i);
-               TextView strip1 = (TextView) row.getChildAt(1);
-               TextView strip2 = (TextView) row.getChildAt(2);
-               strip1.setText(R.string._000_0);
-               strip1.setTextColor(0xff000000);
-               strip2.setText(R.string._000_0);
-               strip2.setTextColor(0xff000000);
-           }
+            for (int i = 1; i < 11; i++) {
+                TableRow row = (TableRow) tblLayout.getChildAt(i);
+                TextView strip1 = (TextView) row.getChildAt(1);
+                TextView strip2 = (TextView) row.getChildAt(2);
+                strip1.setText(R.string._000_0);
+                strip1.setTextColor(0xff000000);
+                strip2.setText(R.string._000_0);
+                strip2.setTextColor(0xff000000);
+            }
             binding.baseTime.setText("");
             return true;
         }
@@ -649,6 +708,8 @@ public class MainActivity extends AppCompatActivity {
         String strips = binding.numstrips.getText().toString();
         int numstrips = Integer.parseInt(strips);
         String[] stops = getResources().getStringArray(R.array.stops);
+        String[] method = getResources().getStringArray(R.array.method);
+        int kk = Arrays.asList(method).indexOf(binding.nmethod.getText().toString());
         int k = Arrays.asList(stops).indexOf(binding.numstops.getText().toString());
         TableLayout tblLayout = binding.tableStrips;
 
@@ -663,8 +724,9 @@ public class MainActivity extends AppCompatActivity {
                 strip2.setLongClickable(false);
             }
 
-            memo[10]=binding.ndelay.getText().toString();
-            binding.ndelay.setText(memo2);
+            memo[10] = binding.ndelay.getText().toString();
+            if (kk ==1) binding.ndelay.setText(memo2);
+            else binding.ndelay.setText(memo3);
 
             numstr = 1;
             int cent = Integer.parseInt(expo.substring(0, 1));
@@ -698,7 +760,6 @@ public class MainActivity extends AppCompatActivity {
             binding.numstrips.setBackgroundResource(R.drawable.shape);
 
 
-
             stripsd = stripcount(ex, numstrips, stopsi[k]);
             strippaint(stripsd, numstrips);
             stripselect1(numstr);
@@ -708,7 +769,7 @@ public class MainActivity extends AppCompatActivity {
             binding.stTotal.setText(R.string.strip);
             binding.stEach.setText(R.string.memo);
             binding.upb.setVisibility(View.VISIBLE);
-            binding.upb.setEnabled(true) ;
+            binding.upb.setEnabled(true);
             binding.downb.setVisibility(View.VISIBLE);
             binding.downb.setEnabled(true);
             binding.baseTime.setVisibility(View.VISIBLE);
@@ -729,9 +790,9 @@ public class MainActivity extends AppCompatActivity {
                 } else strip1.setTextColor(Color.parseColor("#80FF0000"));
                 if (!strip2.getText().toString().equals(getResources().getString(R.string._000_0))) {
                     strip2.setTextColor(Color.parseColor("#80FF0000"));
-                    if(i == numstr) {
+                    if (i == numstr) {
                         binding.time.setText(strip2.getText());
-                        expo= binding.time.getText().toString();
+                        expo = binding.time.getText().toString();
                         n = expo.length();
                         int cent = Integer.parseInt(expo.substring(0, 1));
                         int dece = Integer.parseInt(expo.substring(1, 2));
@@ -744,7 +805,11 @@ public class MainActivity extends AppCompatActivity {
                     strip2.setText(R.string._000_0);
                 }
             }
-            memo2=binding.ndelay.getText().toString();
+
+            if (kk ==1) memo2=binding.ndelay.getText().toString();
+            else memo3=binding.ndelay.getText().toString();
+
+            memo2 = binding.ndelay.getText().toString();
             binding.ndelay.setText(memo[10]);
             binding.method.setEnabled(false);
             binding.nmethod.setEnabled(false);
@@ -769,20 +834,13 @@ public class MainActivity extends AppCompatActivity {
         binding.reset.setEnabled(false);
 
         timer10 = new CountDownTimer((long) ((stripsd[9] - stripsd[8]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m <(long) ((stripsd[9] - stripsd[8]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 stripselect1(1);
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
                 binding.expo.setText(getString(R.string.button));
@@ -793,21 +851,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer9 = new CountDownTimer((long) ((stripsd[8] - stripsd[7]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m <(long) ((stripsd[8] - stripsd[7]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
-
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (10 <= numstrips + 1) {
                     stripselect1(10);
                     new Handler().postDelayed(() -> {
@@ -826,21 +876,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer8 = new CountDownTimer((long) ((stripsd[7] - stripsd[6]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m <(long) ((stripsd[7] - stripsd[6]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
-
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (9 <= numstrips + 1) {
                     stripselect1(9);
                     new Handler().postDelayed(() -> {
@@ -859,21 +901,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer7 = new CountDownTimer((long) ((stripsd[6] - stripsd[5]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m < (long) ((stripsd[6] - stripsd[5]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
-
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (8 <= numstrips + 1) {
                     stripselect1(8);
                     new Handler().postDelayed(() -> {
@@ -892,21 +926,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer6 = new CountDownTimer((long) ((stripsd[5] - stripsd[4]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m < (long) ((stripsd[5] - stripsd[4]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
-
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (7 <= numstrips + 1) {
                     stripselect1(7);
                     new Handler().postDelayed(() -> {
@@ -925,21 +951,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer5 = new CountDownTimer((long) ((stripsd[4] - stripsd[3]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m <(long) ((stripsd[4] - stripsd[3]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
-
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (6 <= numstrips + 1) {
                     stripselect1(6);
                     new Handler().postDelayed(() -> {
@@ -959,21 +977,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         timer4 = new CountDownTimer((long) ((stripsd[3] - stripsd[2]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m <(long) ((stripsd[3] - stripsd[2]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
-
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (5 <= numstrips + 1) {
                     stripselect1(5);
                     new Handler().postDelayed(() -> {
@@ -992,20 +1002,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer3 = new CountDownTimer((long) ((stripsd[2] - stripsd[1]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m<(long) ((stripsd[2] - stripsd[1]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (4 <= numstrips + 1) {
                     stripselect1(4);
                     new Handler().postDelayed(() -> {
@@ -1024,20 +1027,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer2 = new CountDownTimer((long) ((stripsd[1] - stripsd[0]) * 1000), 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m< (long) ((stripsd[1] - stripsd[0]) * 1000)) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (3 <= numstrips + 1) {
                     stripselect1(3);
                     new Handler().postDelayed(() -> {
@@ -1056,20 +1052,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer = new CountDownTimer((long) stripsd[0] * 1000, 100) {
-            int n;
-            long m;
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-                n=n+1;
-                m=m+100;
-                if (n==10 && m< (long) stripsd[0] * 1000) {
-                    toneGen1.startTone(ToneGenerator.TONE_DTMF_4,50);
-                    n=0;
-                }
             }
 
             public void onFinish() {
                 paquete();
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 if (2 <= numstrips + 1) {
                     stripselect1(2);
                     new Handler().postDelayed(() -> {
