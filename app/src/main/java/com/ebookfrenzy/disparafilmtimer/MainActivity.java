@@ -54,15 +54,7 @@ public class MainActivity extends AppCompatActivity {
     String memo2 = "750";
     String memo3 = "0";
     CountDownTimer timer;
-    CountDownTimer timer2;
-    CountDownTimer timer3;
-    CountDownTimer timer4;
-    CountDownTimer timer5;
-    CountDownTimer timer6;
-    CountDownTimer timer7;
-    CountDownTimer timer8;
-    CountDownTimer timer9;
-    CountDownTimer timer10;
+    CountDownTimer[] timers = new CountDownTimer[10];
 
     public Boolean Focus = false;
 
@@ -161,9 +153,20 @@ public class MainActivity extends AppCompatActivity {
                         starTimer(ex, getString(R.string.button1), delay);
                     }
                 } else {
-                    binding.expo.setEnabled(false);
                     toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                    startimer2(getString(R.string.wait), delay);
+                    String ini = binding.time.getText().toString();
+                    double ex1 = Double.parseDouble(ini) * 1000;
+                    long ex = (int) ex1;
+                    if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
+                        startimer2(ex, getString(R.string.button1), delay);
+                    } else if (binding.expo.getText().equals(getString(R.string.button1))) {
+                        timers[numstr-1].cancel();
+                        paquete();
+                        binding.expo.setText(getString(R.string.button2));
+                        binding.reset.setEnabled(true);
+                    } else if (binding.expo.getText().equals(getString(R.string.button2))) {
+                        startimer2(ex, getString(R.string.button1), delay);
+                    }
                 }
             }
         });
@@ -578,31 +581,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void stripselectA(View view) {
-        numstr = Integer.parseInt(view.getTag().toString());
-        stripselect1A(numstr);
-    }
-
-    public void stripselect1A(int numstr) {
-        TableLayout tblLayout = binding.tableStrips;
-        TableRow row = (TableRow) tblLayout.getChildAt(numstr);
-        TextView strip2 = (TextView) row.getChildAt(2);
-
-        if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-            if (!strip2.getText().toString().isEmpty() && !strip2.getText().toString().equals(getString(R.string._000_0))) {
-                binding.time.setText(strip2.getText());
-                String expo = binding.time.getText().toString();
-                int n = expo.length();
-                int cent = Integer.parseInt(expo.substring(0, 1));
-                int dece = Integer.parseInt(expo.substring(1, 2));
-                int unid = Integer.parseInt(expo.substring(2, 3));
-                int deci = Integer.parseInt(expo.substring(4, n));
-                time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
-            }
-        }
-    }
-
-
     public boolean parTimer(int i) {
         TableLayout tblLayout = binding.tableStrips;
         TableRow row = (TableRow) tblLayout.getChildAt(i);
@@ -825,261 +803,70 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void startimer2(String st, int delay) {
+    public void startimer2(long ex, String st, int delay) {
         int numstrips = Integer.parseInt(binding.numstrips.getText().toString());
-        long time1 = (long) (stripsd[0] * 1000);
-        stripselect1(1);
         binding.expo.setText(st);
         binding.focus.setEnabled(false);
         binding.reset.setEnabled(false);
 
-        timer10 = new CountDownTimer((long) ((stripsd[9] - stripsd[8]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
+        for(int i = numstrips; i>=numstr-1; i--) {
+            String ii = String.valueOf(i);
 
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                stripselect1(1);
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                binding.expo.setText(getString(R.string.button));
-                binding.expo.setEnabled(true);
-                binding.focus.setEnabled(true);
-                binding.reset.setEnabled(true);
-            }
-        };
+            if (i == numstr-1) {
+                timers[0] = new CountDownTimer(ex, 100) {
+                    public void onTick(long millisUntilFinished) {
+                        binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                    }
 
-        timer9 = new CountDownTimer((long) ((stripsd[8] - stripsd[7]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
-
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (10 <= numstrips + 1) {
-                    stripselect1(10);
-                    new Handler().postDelayed(() -> {
+                    public void onFinish() {
                         paquete();
-                        timer10.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
+                        toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
+                        if (Integer.parseInt(ii) + 1 <= numstrips) {
+                            stripselect1(Integer.parseInt(ii) + 2);
+                            new Handler().postDelayed(() -> {
+                                paquete();
+                                timers[Integer.parseInt(ii) + 1].start();
+                            }, delay);
+                        } else {
+                            stripselect1(1);
+                            binding.expo.setText(getString(R.string.button));
+                            binding.expo.setEnabled(true);
+                            binding.focus.setEnabled(true);
+                            binding.reset.setEnabled(true);
+                        }
+                    }
+                };
+                new Handler().postDelayed(() -> {
+                    paquete();
+                    timers[0].start();
+                }, delay);
             }
-        };
 
-        timer8 = new CountDownTimer((long) ((stripsd[7] - stripsd[6]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
+            else {
+                timers[i] = new CountDownTimer((long) ((stripsd[i] - stripsd[i-1]) * 1000), 100) {
+                    public void onTick(long millisUntilFinished) {
+                        binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
+                    }
 
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (9 <= numstrips + 1) {
-                    stripselect1(9);
-                    new Handler().postDelayed(() -> {
+                    public void onFinish() {
                         paquete();
-                        timer9.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
+                        toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
+                        if (Integer.parseInt(ii) + 1 <= numstrips) {
+                            stripselect1(Integer.parseInt(ii) + 2);
+                            new Handler().postDelayed(() -> {
+                                paquete();
+                                timers[Integer.parseInt(ii) + 1].start();
+                            }, delay);
+                        } else {
+                            stripselect1(1);
+                            binding.expo.setText(getString(R.string.button));
+                            binding.expo.setEnabled(true);
+                            binding.focus.setEnabled(true);
+                            binding.reset.setEnabled(true);
+                        }
+                    }
+                };
             }
-        };
-
-        timer7 = new CountDownTimer((long) ((stripsd[6] - stripsd[5]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
-
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (8 <= numstrips + 1) {
-                    stripselect1(8);
-                    new Handler().postDelayed(() -> {
-                        paquete();
-                        timer8.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
-            }
-        };
-
-        timer6 = new CountDownTimer((long) ((stripsd[5] - stripsd[4]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
-
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (7 <= numstrips + 1) {
-                    stripselect1(7);
-                    new Handler().postDelayed(() -> {
-                        paquete();
-                        timer7.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
-            }
-        };
-
-        timer5 = new CountDownTimer((long) ((stripsd[4] - stripsd[3]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
-
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (6 <= numstrips + 1) {
-                    stripselect1(6);
-                    new Handler().postDelayed(() -> {
-                        paquete();
-                        timer6.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
-            }
-        };
-
-
-        timer4 = new CountDownTimer((long) ((stripsd[3] - stripsd[2]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
-
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (5 <= numstrips + 1) {
-                    stripselect1(5);
-                    new Handler().postDelayed(() -> {
-                        paquete();
-                        timer5.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
-            }
-        };
-
-        timer3 = new CountDownTimer((long) ((stripsd[2] - stripsd[1]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
-
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (4 <= numstrips + 1) {
-                    stripselect1(4);
-                    new Handler().postDelayed(() -> {
-                        paquete();
-                        timer4.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
-            }
-        };
-
-        timer2 = new CountDownTimer((long) ((stripsd[1] - stripsd[0]) * 1000), 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
-
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (3 <= numstrips + 1) {
-                    stripselect1(3);
-                    new Handler().postDelayed(() -> {
-                        paquete();
-                        timer3.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
-            }
-        };
-
-        timer = new CountDownTimer((long) stripsd[0] * 1000, 100) {
-            public void onTick(long millisUntilFinished) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
-            }
-
-            public void onFinish() {
-                paquete();
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                if (2 <= numstrips + 1) {
-                    stripselect1(2);
-                    new Handler().postDelayed(() -> {
-                        paquete();
-                        timer2.start();
-                    }, delay);
-                } else {
-                    stripselect1(1);
-                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time1) / 1000));
-                    binding.expo.setText(getString(R.string.button));
-                    binding.expo.setEnabled(true);
-                    binding.focus.setEnabled(true);
-                    binding.reset.setEnabled(true);
-                }
-            }
-        };
-
-        new Handler().postDelayed(() -> {
-            paquete();
-            timer.start();
-        }, delay);
-
+        }
     }
 }
