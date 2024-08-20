@@ -14,6 +14,7 @@
     <string name="timer">TIMER</string>
     <string name="strip">STRIP</string>
     <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
     <string name="_0" translatable="false">0</string>
     <string name="up" translatable="false">+</string>
     <string name="down" translatable="false">-</string>

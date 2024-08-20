@@ -141,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
                     String ini = binding.time.getText().toString();
                     double ex1 = Double.parseDouble(ini) * 1000;
                     long ex = (int) ex1;
-                    toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                     if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
                         starTimer(ex, getString(R.string.button1), delay);
                     } else if (binding.expo.getText().equals(getString(R.string.button1))) {
@@ -152,14 +151,15 @@ public class MainActivity extends AppCompatActivity {
                     } else if (binding.expo.getText().equals(getString(R.string.button2))) {
                         starTimer(ex, getString(R.string.button1), delay);
                     }
-                } else {
-                    toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
+                } else if (binding.nmethod.getText().toString().equals("AUTO") && !binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
+
                     String ini = binding.time.getText().toString();
                     double ex1 = Double.parseDouble(ini) * 1000;
                     long ex = (int) ex1;
                     if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
                         startimer2(ex, getString(R.string.button1), delay);
                     } else if (binding.expo.getText().equals(getString(R.string.button1))) {
+                        toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                         timers[numstr-1].cancel();
                         paquete();
                         binding.expo.setText(getString(R.string.button2));
@@ -173,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void starTimer(long ex, String st, int delay) {
-
+        toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
+        binding.expo.setText(R.string.wait);
         timer = new CountDownTimer(ex, 100) {
             int n;
             long m;
@@ -209,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         new Handler().postDelayed(() -> {
+            binding.expo.setText(R.string.button1);
             paquete();
             timer.start();
             binding.focus.setEnabled(false);
@@ -339,6 +341,8 @@ public class MainActivity extends AppCompatActivity {
             binding.focus.setEnabled(true);
         } else {
             stripselect1(1);
+            binding.expo.setText(getString(R.string.button));
+            binding.focus.setEnabled(true);
         }
     }
 
@@ -581,6 +585,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void stripselectA(View view) {
+        numstr = Integer.parseInt(view.getTag().toString());
+        stripselect1A(numstr);
+    }
+
+    public void stripselect1A(int numstr) {
+        TableLayout tblLayout = binding.tableStrips;
+        TableRow row = (TableRow) tblLayout.getChildAt(numstr);
+        TextView strip2 = (TextView) row.getChildAt(2);
+
+        if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
+            if (!strip2.getText().toString().isEmpty() && !strip2.getText().toString().equals(getString(R.string._000_0))) {
+                binding.time.setText(strip2.getText());
+                String expo = binding.time.getText().toString();
+                int n = expo.length();
+                int cent = Integer.parseInt(expo.substring(0, 1));
+                int dece = Integer.parseInt(expo.substring(1, 2));
+                int unid = Integer.parseInt(expo.substring(2, 3));
+                int deci = Integer.parseInt(expo.substring(4, n));
+                time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
+            }
+        }
+    }
+
     public boolean parTimer(int i) {
         TableLayout tblLayout = binding.tableStrips;
         TableRow row = (TableRow) tblLayout.getChildAt(i);
@@ -805,7 +833,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void startimer2(long ex, String st, int delay) {
         int numstrips = Integer.parseInt(binding.numstrips.getText().toString());
-        binding.expo.setText(st);
+        toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
+        binding.expo.setText(R.string.wait);
         binding.focus.setEnabled(false);
         binding.reset.setEnabled(false);
 
@@ -822,8 +851,10 @@ public class MainActivity extends AppCompatActivity {
                         paquete();
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                         if (Integer.parseInt(ii) + 1 <= numstrips) {
+                            binding.expo.setText(R.string.wait);
                             stripselect1(Integer.parseInt(ii) + 2);
                             new Handler().postDelayed(() -> {
+                                binding.expo.setText(getString(R.string.button1));
                                 paquete();
                                 timers[Integer.parseInt(ii) + 1].start();
                             }, delay);
@@ -838,6 +869,7 @@ public class MainActivity extends AppCompatActivity {
                 };
                 new Handler().postDelayed(() -> {
                     paquete();
+                    binding.expo.setText(st);
                     timers[0].start();
                 }, delay);
             }
@@ -852,9 +884,12 @@ public class MainActivity extends AppCompatActivity {
                         paquete();
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                         if (Integer.parseInt(ii) + 1 <= numstrips) {
+                            binding.expo.setText(R.string.wait);
                             stripselect1(Integer.parseInt(ii) + 2);
                             new Handler().postDelayed(() -> {
+                                binding.expo.setText(getString(R.string.button1));
                                 paquete();
+                                binding.expo.setText(st);
                                 timers[Integer.parseInt(ii) + 1].start();
                             }, delay);
                         } else {
