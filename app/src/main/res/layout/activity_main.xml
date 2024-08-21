@@ -581,7 +581,7 @@
             android:layout_marginTop="22dp"
             android:gravity="center"
             android:onClick="stripClick"
-            android:text="@string/_1"
+            android:text="@string/_2"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/strips"

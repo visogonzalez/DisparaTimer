@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
                 int numstrips = Integer.parseInt(binding.numstrips.getText().toString());
                 if (!binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-                    if (numstr < numstrips + 1) {
+                    if (numstr < numstrips) {
                         numstr = numstr + 1;
                         stripselect1(numstr);
                     } else {
@@ -390,11 +390,11 @@ public class MainActivity extends AppCompatActivity {
 
     public double[] stripcount(double ex, int k, int kk) {
         double[] stripsd = new double[10];
-        for (int i = 0; i <= k; i++) {
+        for (int i = 0; i <= k-1; i++) {
             double expo = (double) i / kk;
             stripsd[i] = ex * Math.pow(2, expo);
         }
-        for (int i = k + 1; i < 10; i++) {
+        for (int i = k; i < 10; i++) {
             stripsd[i] = 0.0;
         }
         return stripsd;
@@ -404,7 +404,7 @@ public class MainActivity extends AppCompatActivity {
         TableLayout tblLayout = binding.tableStrips;
         String method = binding.nmethod.getText().toString();
         if (!method.equals(getResources().getString(R.string.single))) {
-            for (int i = 1; i <= numstrips + 1; i++) {
+            for (int i = 1; i <= numstrips; i++) {
                 TableRow row = (TableRow) tblLayout.getChildAt(i);
                 TextView strip1 = (TextView) row.getChildAt(1);
                 TextView strip2 = (TextView) row.getChildAt(2);
@@ -419,7 +419,7 @@ public class MainActivity extends AppCompatActivity {
                 strip1.setTextColor(Color.parseColor("#80FF0000"));
                 strip2.setTextColor(Color.parseColor("#80FF0000"));
             }
-            for (int i = numstrips + 2; i < 11; i++) {
+            for (int i = numstrips + 1; i < 11; i++) {
                 TableRow row = (TableRow) tblLayout.getChildAt(i);
                 TextView strip1 = (TextView) row.getChildAt(1);
                 TextView strip2 = (TextView) row.getChildAt(2);
@@ -429,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
                 strip2.setTextColor(0xff000000);
             }
         } else {
-            for (int i = 1; i <= numstrips + 1; i++) {
+            for (int i = 1; i <= numstrips; i++) {
                 TableRow row = (TableRow) tblLayout.getChildAt(i);
                 TextView strip1 = (TextView) row.getChildAt(1);
                 TextView strip2 = (TextView) row.getChildAt(2);
@@ -442,7 +442,7 @@ public class MainActivity extends AppCompatActivity {
                 strip1.setTextColor(Color.parseColor("#80FF0000"));
                 strip2.setTextColor(Color.parseColor("#80FF0000"));
             }
-            for (int i = numstrips + 2; i < 11; i++) {
+            for (int i = numstrips + 1; i < 11; i++) {
                 TableRow row = (TableRow) tblLayout.getChildAt(i);
                 TextView strip1 = (TextView) row.getChildAt(1);
                 TextView strip2 = (TextView) row.getChildAt(2);
@@ -463,8 +463,8 @@ public class MainActivity extends AppCompatActivity {
             String[] stops = getResources().getStringArray(R.array.stops);
             int k = Arrays.asList(stops).indexOf(binding.numstops.getText().toString());
 
-            if (numstrips < 9) numstrips = numstrips + 1;
-            else numstrips = 1;
+            if (numstrips < 10) numstrips = numstrips + 1;
+            else numstrips = 2;
             binding.numstrips.setText(String.valueOf(numstrips));
             stripsd = stripcount(ex, numstrips, stopsi[k]);
             strippaint(stripsd, numstrips);
@@ -561,7 +561,7 @@ public class MainActivity extends AppCompatActivity {
                 strip2.setTextColor(Color.parseColor("#80FF0000"));
             }
 
-            for (int k = numstri + 1; k <= numstrips + 1; k++) {
+            for (int k = numstri + 1; k <= numstrips; k++) {
                 row = (TableRow) tblLayout.getChildAt(k);
                 strip0 = (TextView) row.getChildAt(0);
                 strip1 = (TextView) row.getChildAt(1);
@@ -572,7 +572,7 @@ public class MainActivity extends AppCompatActivity {
                 strip2.setTextColor(Color.parseColor("#80FF0000"));
             }
 
-            for (int k = numstrips + 2; k < 11; k++) {
+            for (int k = numstrips + 1; k < 11; k++) {
                 row = (TableRow) tblLayout.getChildAt(k);
                 strip0 = (TextView) row.getChildAt(0);
                 strip1 = (TextView) row.getChildAt(1);
@@ -608,6 +608,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     public boolean parTimer(int i) {
         TableLayout tblLayout = binding.tableStrips;
@@ -838,7 +839,7 @@ public class MainActivity extends AppCompatActivity {
         binding.focus.setEnabled(false);
         binding.reset.setEnabled(false);
 
-        for(int i = numstrips; i>=numstr-1; i--) {
+        for(int i = numstrips-1; i>=numstr-1; i--) {
             String ii = String.valueOf(i);
 
             if (i == numstr-1) {
@@ -850,7 +851,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFinish() {
                         paquete();
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                        if (Integer.parseInt(ii) + 1 <= numstrips) {
+                        if (Integer.parseInt(ii) + 1 <= numstrips-1) {
                             binding.expo.setText(R.string.wait);
                             stripselect1(Integer.parseInt(ii) + 2);
                             new Handler().postDelayed(() -> {
@@ -883,7 +884,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFinish() {
                         paquete();
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                        if (Integer.parseInt(ii) + 1 <= numstrips) {
+                        if (Integer.parseInt(ii) + 1 <= numstrips-1) {
                             binding.expo.setText(R.string.wait);
                             stripselect1(Integer.parseInt(ii) + 2);
                             new Handler().postDelayed(() -> {
