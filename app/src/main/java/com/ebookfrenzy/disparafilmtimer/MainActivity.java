@@ -690,24 +690,25 @@ public class MainActivity extends AppCompatActivity {
         String increme="";
 
         double ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
+        if (!binding.time.getText().toString().equals(getString(R.string._000_0))) {
+            if (k != paso) {
+                time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
+                paso = k;
+                incre = 0;
+            }
+            incre = incre + 1;
 
-        if (k != paso) {
-            time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
-            paso = k;
-            incre = 0;
+            if (incre > 0) increme = "+" + incre + "/" + stopsi[k];
+            else if (incre < 0) increme = incre + "/" + stopsi[k];
+
+            binding.baseTime.setText(String.format(Locale.US, "%05.1f", (double) time0 / 1000) + " " + increme);
+
+
+            double incr = (double) 1 / stopsi[k];
+            ex = ex * Math.pow(2, incr);
+            timei = (long) ((Math.round(ex * 10d) / 10d) * 1000);
+            binding.time.setText(String.format(Locale.US, "%05.1f", ex));
         }
-        incre = incre + 1;
-
-        if (incre > 0) increme = "+" + incre + "/" + stopsi[k];
-        else if(incre <0) increme = incre + "/" + stopsi[k];
-
-        binding.baseTime.setText(String.format(Locale.US, "%05.1f", (double) time0 / 1000) + " " + increme);
-
-
-        double incr = (double) 1 / stopsi[k];
-        ex = ex * Math.pow(2, incr);
-        timei=(long) ((Math.round(ex * 10d) / 10d)*1000);
-        binding.time.setText(String.format(Locale.US, "%05.1f", ex));
     }
 
     public void dowTimer(View view) {
