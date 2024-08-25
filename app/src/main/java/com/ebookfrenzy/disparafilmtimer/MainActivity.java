@@ -513,13 +513,13 @@ public class MainActivity extends AppCompatActivity {
             String[] method = getResources().getStringArray(R.array.method);
             int kk = Arrays.asList(method).indexOf(binding.nmethod.getText().toString());
 
-            if (kk == 1) memo2 = binding.ndelay.getText().toString();
+            if (kk == 0) memo2 = binding.ndelay.getText().toString();
             else memo3 = binding.ndelay.getText().toString();
 
             if (kk < method.length - 1) kk = kk + 1;
             else kk = 0;
             binding.nmethod.setText(method[kk]);
-            if (kk == 1) binding.ndelay.setText(memo2);
+            if (kk == 0) binding.ndelay.setText(memo2);
             else binding.ndelay.setText(memo3);
             stripsd = stripcount(ex, numstrips, stopsi[k]);
             strippaint(stripsd, numstrips);
@@ -778,7 +778,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             memo[10] = binding.ndelay.getText().toString();
-            if (kk == 1) binding.ndelay.setText(memo2);
+            if (kk == 0) binding.ndelay.setText(memo2);
             else binding.ndelay.setText(memo3);
 
             numstr = 1;
@@ -860,7 +860,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            if (kk == 1) memo2 = binding.ndelay.getText().toString();
+            if (kk == 0) memo2 = binding.ndelay.getText().toString();
             else memo3 = binding.ndelay.getText().toString();
 
             memo2 = binding.ndelay.getText().toString();

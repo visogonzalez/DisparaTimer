@@ -6,10 +6,10 @@
     <string name="button2">RESUME</string>
     <string name="reset">RT</string>
     <string name="foc">FO</string>
-    <string name="each">STEP</string>
+    <string name="each">STEPS</string>
     <string name="total">TOTAL</string>
     <string name="stnumber" translatable="false">#</string>
-    <string name="strips">STRIPS</string>
+    <string name="strips">STEPS</string>
     <string name="mode">MODE</string>
     <string name="timer">TIMER</string>
     <string name="strip">STRIP</string>
