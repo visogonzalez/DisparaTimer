@@ -20,7 +20,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/_000_0"
             android:textColor="#B3FF0000"
-            android:textSize="150sp"
+            android:textSize="150dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
             android:text="@string/button"
             android:textColor="#80FF0000"
             android:textColorLink="#FF0000"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/reset"
             app:layout_constraintHorizontal_bias="0.5"
@@ -50,7 +50,7 @@
             android:text="@string/foc"
             android:textColor="@color/black"
             android:textColorLink="#FF0000"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/expo"
             app:layout_constraintHorizontal_bias="0.5"
@@ -68,7 +68,7 @@
             android:textColor="#80FF0000"
             android:longClickable="true"
             android:textColorLink="#FF0000"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -96,7 +96,7 @@
                     android:gravity="center"
                     android:text="@string/stnumber"
                     android:textColor="#80FF0000"
-                    android:textSize="24sp" />
+                    android:textSize="24dp" />
 
                 <TextView
                     android:id="@+id/stEach"
@@ -105,7 +105,7 @@
                     android:gravity="center"
                     android:text="@string/memo"
                     android:textColor="#80FF0000"
-                    android:textSize="24sp" />
+                    android:textSize="24dp" />
 
                 <TextView
                     android:id="@+id/stTotal"
@@ -114,7 +114,7 @@
                     android:gravity="center"
                     android:text="@string/strip"
                     android:textColor="#80FF0000"
-                    android:textSize="24sp" />
+                    android:textSize="24dp" />
             </TableRow>
 
             <TableRow
@@ -132,7 +132,7 @@
                     android:gravity="center"
                     android:text="1"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st1Par"
@@ -145,7 +145,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st1Ac"
@@ -158,7 +158,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -176,7 +176,7 @@
                     android:gravity="center"
                     android:text="2"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st2Par"
@@ -189,7 +189,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st2Ac"
@@ -202,7 +202,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -220,7 +220,7 @@
                     android:gravity="center"
                     android:text="3"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st3Par"
@@ -233,7 +233,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st3Ac"
@@ -246,7 +246,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -264,7 +264,7 @@
                     android:gravity="center"
                     android:text="4"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st4Par"
@@ -277,7 +277,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st4Ac"
@@ -290,7 +290,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -308,7 +308,7 @@
                     android:gravity="center"
                     android:text="5"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st5Par"
@@ -321,7 +321,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st5Ac"
@@ -334,7 +334,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -352,7 +352,7 @@
                     android:gravity="center"
                     android:text="6"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st6Par"
@@ -365,7 +365,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st6Ac"
@@ -378,7 +378,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -396,7 +396,7 @@
                     android:gravity="center"
                     android:text="7"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st7Par"
@@ -409,7 +409,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st7Ac"
@@ -422,7 +422,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -440,7 +440,7 @@
                     android:gravity="center"
                     android:text="8"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st8Par"
@@ -453,7 +453,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st8Ac"
@@ -466,7 +466,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -484,7 +484,7 @@
                     android:gravity="center"
                     android:text="9"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st9Par"
@@ -497,7 +497,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st9Ac"
@@ -510,7 +510,7 @@
                     android:gravity="center"
                     android:longClickable="true"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
             <TableRow
@@ -528,7 +528,7 @@
                     android:gravity="center"
                     android:text="10"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st10Par"
@@ -541,7 +541,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st10Ac"
@@ -554,7 +554,7 @@
                     android:longClickable="true"
                     android:gravity="center"
                     android:textColor="#80FF0000"
-                    android:textSize="34sp" />
+                    android:textSize="34dp" />
             </TableRow>
 
 
@@ -570,7 +570,7 @@
             android:onClick="stripClick"
             android:text="@string/strips"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mode" />
 
@@ -583,7 +583,7 @@
             android:onClick="stripClick"
             android:text="@string/_2"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/strips"
             app:layout_constraintTop_toBottomOf="@+id/nmode" />
 
@@ -597,7 +597,7 @@
             android:onClick="stopClick"
             android:text="@string/stops"
             android:textColor="#809B9B9B"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/strips" />
 
@@ -611,7 +611,7 @@
             android:onClick="methodClick"
             android:text="@string/method"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stops" />
 
@@ -626,7 +626,7 @@
             android:onClick="stopClick"
             android:text="@string/nstops"
             android:textColor="#80FF0000"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/stops"
             app:layout_constraintTop_toBottomOf="@+id/numstrips" />
 
@@ -639,7 +639,7 @@
             android:onClick="methodClick"
             android:text="@string/automatic"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/method" />
@@ -653,7 +653,7 @@
             android:gravity="center"
             android:text="@string/delay"
             android:textColor="#809B9B9B"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nmethod" />
 
@@ -673,7 +673,7 @@
             android:textColor="#80FF0000"
             android:textColorHint="#80FF0000"
             android:textCursorDrawable="@null"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/unit"
             app:layout_constraintTop_toBottomOf="@+id/delay" />
 
@@ -685,7 +685,7 @@
             android:gravity="center"
             android:text="ms"
             android:textColor="#809B9B9B"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/delay" />
 
@@ -699,7 +699,7 @@
             android:onClick="modeClick"
             android:text="@string/timer"
             android:textColor="#80FF0000"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintEnd_toStartOf="@+id/mode"
             app:layout_constraintTop_toBottomOf="@+id/time" />
 
@@ -711,8 +711,9 @@
             android:layout_marginEnd="8dp"
             android:onClick="modeClick"
             android:text="@string/mode"
+            android:autoSizeTextType="uniform"
             android:textColor="#809B9B9B"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time" />
 
@@ -727,7 +728,7 @@
             android:onClick="upTimer"
             android:text="@string/up"
             android:textColor="#80FF0000"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/baseTime" />
 
@@ -741,7 +742,7 @@
             android:onClick="dowTimer"
             android:text="@string/down"
             android:textColor="#80FF0000"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/upb" />
 
@@ -753,7 +754,7 @@
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:textColor="#80FF0000"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ndelay" />
 

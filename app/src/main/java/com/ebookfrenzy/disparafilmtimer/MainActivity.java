@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.net.wifi.WifiManager;
 import android.net.DhcpInfo;
@@ -35,6 +36,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -114,6 +116,31 @@ public class MainActivity extends AppCompatActivity {
         binding.st8Ac.setOnLongClickListener(v -> acTimer(8));
         binding.st9Ac.setOnLongClickListener(v -> acTimer(9));
         binding.st10Ac.setOnLongClickListener(v -> acTimer(10));
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        binding.time.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (150 * metrics.density) /3);
+        binding.mode.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.nmode.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (16 * metrics.density) /3);
+        binding.strips.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.numstrips.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.stops.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.numstops.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.method.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.nmethod.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.delay.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.ndelay.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.unit.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.upb.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.downb.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+        binding.baseTime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (20 * metrics.density) /3);
+
+        ViewGroup.LayoutParams params= binding.expo.getLayoutParams();
+        params.height= (int) (params.height*metrics.density/3);
+        params= binding.reset.getLayoutParams();
+        params.height= (int) (params.height*metrics.density/3);
+        params= binding.focus.getLayoutParams();
+        params.height= (int) (params.height*metrics.density/3);
+
 
 
         view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
@@ -247,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
             int action = m.getActionMasked();
             //int actionIndex =
             DisplayMetrics metrics = getResources().getDisplayMetrics();
-            int dpi = metrics.densityDpi;
+            float dpi = metrics.density;
 
             Rect bounds = new Rect();
             binding.time.getLineBounds(0, bounds);
@@ -256,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             int bot = bounds.bottom;
 
             if (action == MotionEvent.ACTION_DOWN) {
-                if (x > ce - (460 * dpi / 440) && x < ce - (360 * dpi / 440)) {
+                if (x > ce - (460 * dpi / 3*metrics.densityDpi/440) && x < ce - (360 * dpi / 3*metrics.densityDpi/440)) {
                     if (y <= bot && y >= ceY) {
                         if (cent >= 1) cent = cent - 1;
                         else cent = 9;
@@ -267,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce - (265 * dpi / 440) && x < ce - (95 * dpi / 440)) {
+                if (x > ce - (265 * dpi / 3*metrics.densityDpi/440) && x < ce - (95 * dpi / 3*metrics.densityDpi/440)) {
                     if (y <= bot && y >= ceY) {
                         if (dece >= 1) dece = dece - 1;
                         else dece = 9;
@@ -278,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce && x < ce + (100 * dpi / 440)) {
+                if (x > ce && x < ce + (100 * dpi / 3*metrics.densityDpi/440)) {
                     if (y <= bot && y >= ceY) {
                         if (unid >= 1) unid = unid - 1;
                         else unid = 9;
@@ -289,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce + (290 * dpi / 440) && x < ce + (390 * dpi / 440)) {
+                if (x > ce + (290 * dpi / 3*metrics.densityDpi/440) && x < ce + (390 * dpi / 3*metrics.densityDpi/440)) {
                     if (y <= bot && y >= ceY) {
                         if (deci >= 1) deci = deci - 1;
                         else deci = 9;
@@ -304,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             binding.time.setText(String.format(Locale.US, "%05.1f", ex));
-            if (!binding.nmode.getText().toString().equals(getResources().getString(R.string.timer)) && x > ce - (460*dpi/440) && y <= bot) {
+            if (!binding.nmode.getText().toString().equals(getResources().getString(R.string.timer)) && x > ce - (460*dpi / 3*metrics.densityDpi/440) && y <= bot) {
                 numstr = 1;
                 stripsd = stripcount(ex, numstrips, stopsi[k]);
                 strippaint(stripsd, numstrips);
