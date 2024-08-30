@@ -91,8 +91,8 @@
 
                 <TextView
                     android:id="@+id/stNumb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="34dp"
                     android:gravity="center"
                     android:text="@string/stnumber"
                     android:textColor="#80FF0000"
@@ -100,8 +100,8 @@
 
                 <TextView
                     android:id="@+id/stEach"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="89dp"
+                    android:layout_height="34dp"
                     android:gravity="center"
                     android:text="@string/memo"
                     android:textColor="#80FF0000"
@@ -109,8 +109,8 @@
 
                 <TextView
                     android:id="@+id/stTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="89dp"
+                    android:layout_height="34dp"
                     android:gravity="center"
                     android:text="@string/strip"
                     android:textColor="#80FF0000"
@@ -121,12 +121,12 @@
                 android:id="@+id/st1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="1"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="1">
 
                 <TextView
                     android:id="@+id/st11"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -140,10 +140,10 @@
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="1"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="1"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
@@ -153,10 +153,10 @@
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="1"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="1"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -165,12 +165,12 @@
                 android:id="@+id/st2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="2"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="2">
 
                 <TextView
                     android:id="@+id/st22"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -180,27 +180,27 @@
 
                 <TextView
                     android:id="@+id/st2Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="2"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="2"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st2Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="2"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="2"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -209,12 +209,12 @@
                 android:id="@+id/st3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="3"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="3">
 
                 <TextView
                     android:id="@+id/st33"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -224,27 +224,27 @@
 
                 <TextView
                     android:id="@+id/st3Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="3"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="3"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st3Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="3"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="3"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -253,12 +253,12 @@
                 android:id="@+id/st4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="4"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="4">
 
                 <TextView
                     android:id="@+id/st44"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -268,27 +268,27 @@
 
                 <TextView
                     android:id="@+id/st4Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="4"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="4"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st4Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="4"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="4"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -297,12 +297,12 @@
                 android:id="@+id/st5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="5"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="5">
 
                 <TextView
                     android:id="@+id/st55"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -312,27 +312,27 @@
 
                 <TextView
                     android:id="@+id/st5Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="5"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="5"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st5Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="5"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="5"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -341,12 +341,12 @@
                 android:id="@+id/st6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="6"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="6">
 
                 <TextView
                     android:id="@+id/st66"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -356,27 +356,27 @@
 
                 <TextView
                     android:id="@+id/st6Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="6"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="6"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st6Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="6"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="6"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -385,12 +385,13 @@
                 android:id="@+id/st7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="7"
-                android:onClick="stripselect">
+                android:layout_weight="1"
+                android:onClick="stripselect"
+                android:tag="7">
 
                 <TextView
                     android:id="@+id/st77"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -400,27 +401,27 @@
 
                 <TextView
                     android:id="@+id/st7Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="7"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="7"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st7Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="7"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="7"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -429,12 +430,12 @@
                 android:id="@+id/st8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="8"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="8">
 
                 <TextView
                     android:id="@+id/st88"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -444,27 +445,27 @@
 
                 <TextView
                     android:id="@+id/st8Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="8"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="8"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st8Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="8"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="8"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -473,12 +474,12 @@
                 android:id="@+id/st9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="9"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="9">
 
                 <TextView
                     android:id="@+id/st99"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -488,27 +489,27 @@
 
                 <TextView
                     android:id="@+id/st9Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="9"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="9"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st9Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="9"
-                    android:onClick="stripselectA"
                     android:gravity="center"
                     android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="9"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -517,12 +518,12 @@
                 android:id="@+id/st10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tag="10"
-                android:onClick="stripselect">
+                android:onClick="stripselect"
+                android:tag="10">
 
                 <TextView
                     android:id="@+id/st100"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
@@ -532,27 +533,27 @@
 
                 <TextView
                     android:id="@+id/st10Par"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="10"
-                    android:onClick="stripselect"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselect"
+                    android:tag="10"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
 
                 <TextView
                     android:id="@+id/st10Ac"
-                    android:layout_width="wrap_content"
+                    android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:background="@drawable/shape"
                     android:fontFamily="@font/g7_segment_7a"
-                    android:tag="10"
-                    android:onClick="stripselectA"
-                    android:longClickable="true"
                     android:gravity="center"
+                    android:longClickable="true"
+                    android:onClick="stripselectA"
+                    android:tag="10"
                     android:textColor="#80FF0000"
                     android:textSize="34dp" />
             </TableRow>
@@ -562,7 +563,7 @@
 
         <TextView
             android:id="@+id/strips"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="38dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="8dp"
@@ -579,6 +580,7 @@
             android:layout_width="32dp"
             android:layout_height="38dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
             android:gravity="center"
             android:onClick="stripClick"
             android:text="@string/_2"
@@ -589,10 +591,10 @@
 
         <TextView
             android:id="@+id/stops"
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="38dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="8dp"
             android:gravity="center"
             android:onClick="stopClick"
             android:text="@string/stops"
@@ -617,7 +619,7 @@
 
         <TextView
             android:id="@+id/numstops"
-            android:layout_width="wrap_content"
+            android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="4dp"
@@ -632,8 +634,8 @@
 
         <TextView
             android:id="@+id/nmethod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="28dp"
             android:layout_marginEnd="32dp"
             android:gravity="left|center_vertical"
             android:onClick="methodClick"
@@ -647,7 +649,7 @@
         <TextView
             android:id="@+id/delay"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="28dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="12dp"
             android:gravity="center"
@@ -660,7 +662,7 @@
         <EditText
             android:id="@+id/ndelay"
             android:layout_width="63dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginEnd="5dp"
             android:backgroundTint="#33FF0000"
             android:cursorVisible="false"
@@ -679,7 +681,7 @@
 
         <TextView
             android:id="@+id/unit"
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="48dp"
             android:layout_marginEnd="12dp"
             android:gravity="center"
@@ -691,8 +693,8 @@
 
         <TextView
             android:id="@+id/nmode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="52dp"
+            android:layout_height="23dp"
             android:layout_marginTop="19dp"
             android:layout_marginEnd="4dp"
             android:background="@drawable/shape"
@@ -705,13 +707,13 @@
 
         <TextView
             android:id="@+id/mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="28dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:autoSizeTextType="uniform"
             android:onClick="modeClick"
             android:text="@string/mode"
-            android:autoSizeTextType="uniform"
             android:textColor="#809B9B9B"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -719,8 +721,8 @@
 
         <android.widget.Button
             android:id="@+id/upb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="48dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#33FF0000"
@@ -734,8 +736,8 @@
 
         <android.widget.Button
             android:id="@+id/downb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#33FF0000"
             android:gravity="center"
