@@ -563,7 +563,7 @@
 
         <TextView
             android:id="@+id/strips"
-            android:layout_width="60dp"
+            android:layout_width="90dp"
             android:layout_height="38dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="8dp"
@@ -580,7 +580,6 @@
             android:layout_width="32dp"
             android:layout_height="38dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
             android:gravity="center"
             android:onClick="stripClick"
             android:text="@string/_2"
