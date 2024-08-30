@@ -244,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView strip0 = (TextView) row.getChildAt(0);
                 TextView strip1 = (TextView) row.getChildAt(1);
                 TextView strip2 = (TextView) row.getChildAt(2);
+
                 if(i==0){
                     strip0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 *factor));
                     strip1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 *factor));
