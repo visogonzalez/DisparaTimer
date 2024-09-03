@@ -3,9 +3,12 @@ import time
 import socket
 from machine import Pin
 
-led=Pin(16,Pin.OUT)
+r1=Pin(16,Pin.OUT)
+r2=Pin(17,Pin.OUT)
 led2= Pin("LED", Pin.OUT)
 led2.on()
+r1.off()
+r2.on()
 
 # if you do not see the network you may have to power cycle
 # unplug your pico w for 10 seconds and plug it in again
@@ -35,6 +38,7 @@ def ap_mode(ssid, password):
 
     while True:
       data, addre = s2.recvfrom(1024)
-      led.toggle()
+      r1.toggle()
+      r2.toggle()
 
 ap_mode('DISPARA','DISPARAFILM')
