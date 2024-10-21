@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     public long time0;
     public long timei;
     public int numstr = 1;
-    int[] stopsi = {2, 3, 4, 6, 8};
-    int paso = 3;
+    int[] stopsi = {1, 2, 3, 4, 6, 8};
+    int paso = 4;
     int incre;
     double[] stripsd;
     ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 75);
@@ -121,143 +121,142 @@ public class MainActivity extends AppCompatActivity {
 
         //Tex size and layout rescaling
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        double factor=Math.sqrt(Math.pow(metrics.heightPixels/ metrics.ydpi,2)+Math.pow(metrics.widthPixels/metrics.xdpi,2))/5.742;
+        double factor = Math.sqrt(Math.pow(metrics.heightPixels / metrics.ydpi, 2) + Math.pow(metrics.widthPixels / metrics.xdpi, 2)) / 5.742;
 
         binding.time.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (150.0 * factor));
-        binding.mode.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.nmode.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (16.0 *factor));
-        binding.strips.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.numstrips.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.stops.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.numstops.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.method.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.nmethod.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.delay.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.ndelay.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.unit.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.upb.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.downb.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.baseTime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.expo.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 *factor));
-        binding.focus.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (16.0 *factor));
-        binding.reset.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (16.0 *factor));
+        binding.mode.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.nmode.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (16.0 * factor));
+        binding.strips.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.numstrips.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.stops.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.numstops.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.method.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.nmethod.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.delay.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.ndelay.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.unit.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.upb.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.downb.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.baseTime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.expo.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
+        binding.focus.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (16.0 * factor));
+        binding.reset.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (16.0 * factor));
 
-        ViewGroup.LayoutParams params= binding.expo.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params= binding.reset.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params= binding.focus.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
+        ViewGroup.LayoutParams params = binding.expo.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params = binding.reset.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params = binding.focus.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
 
-        params= binding.mode.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        ViewGroup.MarginLayoutParams params2= (ViewGroup.MarginLayoutParams) binding.mode.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
+        params = binding.mode.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        ViewGroup.MarginLayoutParams params2 = (ViewGroup.MarginLayoutParams) binding.mode.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
 
-        params= binding.nmode.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params2= (ViewGroup.MarginLayoutParams) binding.nmode.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
+        params = binding.nmode.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.nmode.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
 
-        params2= (ViewGroup.MarginLayoutParams) binding.tableStrips.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.tableStrips.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
 
-        params= binding.numstrips.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params2= (ViewGroup.MarginLayoutParams) binding.numstrips.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
-
-
-        params= binding.strips.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params2= (ViewGroup.MarginLayoutParams) binding.strips.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
-
-        params= binding.stops.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params2= (ViewGroup.MarginLayoutParams) binding.stops.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
-
-        params= binding.numstops.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params2= (ViewGroup.MarginLayoutParams) binding.numstops.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
-
-        params= binding.delay.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params2= (ViewGroup.MarginLayoutParams) binding.delay.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
-
-        params= binding.ndelay.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
+        params = binding.numstrips.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.numstrips.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
 
 
-        params= binding.method.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params2= (ViewGroup.MarginLayoutParams) binding.method.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
+        params = binding.strips.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.strips.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
 
-        params= binding.nmethod.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
+        params = binding.stops.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.stops.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
 
-        params2= (ViewGroup.MarginLayoutParams) binding.baseTime.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
+        params = binding.numstops.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.numstops.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
 
-        params= binding.upb.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
-        params2= (ViewGroup.MarginLayoutParams) binding.upb.getLayoutParams();
-        params2.topMargin= (int) (params2.topMargin*factor);
+        params = binding.delay.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.delay.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
 
-        params= binding.downb.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
+        params = binding.ndelay.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
 
-        params= binding.unit.getLayoutParams();
-        params.height= (int) (params.height*factor);
-        params.width= (int) (params.width*factor);
+
+        params = binding.method.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.method.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
+
+        params = binding.nmethod.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+
+        params2 = (ViewGroup.MarginLayoutParams) binding.baseTime.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
+
+        params = binding.upb.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+        params2 = (ViewGroup.MarginLayoutParams) binding.upb.getLayoutParams();
+        params2.topMargin = (int) (params2.topMargin * factor);
+
+        params = binding.downb.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
+
+        params = binding.unit.getLayoutParams();
+        params.height = (int) (params.height * factor);
+        params.width = (int) (params.width * factor);
 
         TableLayout tblLayout = binding.tableStrips;
 
-            for (int i = 0; i < 11; i++) {
-                TableRow row = (TableRow) tblLayout.getChildAt(i);
-                params = row.getChildAt(0).getLayoutParams();
-                params.height= (int) (params.height*factor);
-                params.width= (int) (params.width*factor);
-                params =  row.getChildAt(1).getLayoutParams();
-                params.height= (int) (params.height*factor);
-                params.width= (int) (params.width*factor);
-                params = row.getChildAt(2).getLayoutParams();
-                params.height= (int) (params.height*factor);
-                params.width= (int) (params.width*factor);
-                TextView strip0 = (TextView) row.getChildAt(0);
-                TextView strip1 = (TextView) row.getChildAt(1);
-                TextView strip2 = (TextView) row.getChildAt(2);
+        for (int i = 0; i < 11; i++) {
+            TableRow row = (TableRow) tblLayout.getChildAt(i);
+            params = row.getChildAt(0).getLayoutParams();
+            params.height = (int) (params.height * factor);
+            params.width = (int) (params.width * factor);
+            params = row.getChildAt(1).getLayoutParams();
+            params.height = (int) (params.height * factor);
+            params.width = (int) (params.width * factor);
+            params = row.getChildAt(2).getLayoutParams();
+            params.height = (int) (params.height * factor);
+            params.width = (int) (params.width * factor);
+            TextView strip0 = (TextView) row.getChildAt(0);
+            TextView strip1 = (TextView) row.getChildAt(1);
+            TextView strip2 = (TextView) row.getChildAt(2);
 
-                if(i==0){
-                    strip0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 *factor));
-                    strip1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 *factor));
-                    strip2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 *factor));
-                }
-                else{
-                    strip0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 *factor));
-                    strip1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 *factor));
-                    strip2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 *factor));
-                }
+            if (i == 0) {
+                strip0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 * factor));
+                strip1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 * factor));
+                strip2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 * factor));
+            } else {
+                strip0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 * factor));
+                strip1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 * factor));
+                strip2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 * factor));
             }
+        }
 
         //ndelay cursor visible on input
         view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
@@ -339,8 +338,10 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 paquete();
                 binding.expo.setText(getString(R.string.button));
-                if(incre==0) binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time0) / 1000));
-                else binding.time.setText(String.format(Locale.US, "%05.1f", ((double) timei) / 1000));
+                if (incre == 0)
+                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) time0) / 1000));
+                else
+                    binding.time.setText(String.format(Locale.US, "%05.1f", ((double) timei) / 1000));
                 binding.focus.setEnabled(true);
                 binding.reset.setEnabled(true);
                 toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
@@ -391,7 +392,7 @@ public class MainActivity extends AppCompatActivity {
             int action = m.getActionMasked();
             //int actionIndex =
             DisplayMetrics metrics = getResources().getDisplayMetrics();
-            double factor=Math.sqrt(Math.pow(metrics.heightPixels/ metrics.ydpi,2)+Math.pow(metrics.widthPixels/metrics.xdpi,2))/5.742;
+            double factor = Math.sqrt(Math.pow(metrics.heightPixels / metrics.ydpi, 2) + Math.pow(metrics.widthPixels / metrics.xdpi, 2)) / 5.742;
 
             Rect bounds = new Rect();
             binding.time.getLineBounds(0, bounds);
@@ -400,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
             int bot = bounds.bottom;
 
             if (action == MotionEvent.ACTION_DOWN) {
-                if (x > ce - (460 * factor *metrics.densityDpi/440) && x < ce - (360 * factor*metrics.densityDpi/440)) {
+                if (x > ce - (460 * factor * metrics.densityDpi / 440) && x < ce - (360 * factor * metrics.densityDpi / 440)) {
                     if (y <= bot && y >= ceY) {
                         if (cent >= 1) cent = cent - 1;
                         else cent = 9;
@@ -411,7 +412,7 @@ public class MainActivity extends AppCompatActivity {
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce - (265 * factor*metrics.densityDpi/440) && x < ce - (95 * factor*metrics.densityDpi/440)) {
+                if (x > ce - (265 * factor * metrics.densityDpi / 440) && x < ce - (95 * factor * metrics.densityDpi / 440)) {
                     if (y <= bot && y >= ceY) {
                         if (dece >= 1) dece = dece - 1;
                         else dece = 9;
@@ -422,7 +423,7 @@ public class MainActivity extends AppCompatActivity {
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce && x < ce + (100 * factor*metrics.densityDpi/440)) {
+                if (x > ce && x < ce + (100 * factor * metrics.densityDpi / 440)) {
                     if (y <= bot && y >= ceY) {
                         if (unid >= 1) unid = unid - 1;
                         else unid = 9;
@@ -433,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
                     ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
                     time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 }
-                if (x > ce + (290 * factor*metrics.densityDpi/440) && x < ce + (390 * factor*metrics.densityDpi/440)) {
+                if (x > ce + (290 * factor * metrics.densityDpi / 440) && x < ce + (390 * factor * metrics.densityDpi / 440)) {
                     if (y <= bot && y >= ceY) {
                         if (deci >= 1) deci = deci - 1;
                         else deci = 9;
@@ -448,15 +449,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             binding.time.setText(String.format(Locale.US, "%05.1f", ex));
-            if (!binding.nmode.getText().toString().equals(getResources().getString(R.string.timer)) && x > ce - (460*factor*metrics.densityDpi/440) && y <= bot) {
+            if (!binding.nmode.getText().toString().equals(getResources().getString(R.string.timer)) && x > ce - (460 * factor * metrics.densityDpi / 440) && y <= bot) {
                 numstr = 1;
                 stripsd = stripcount(ex, numstrips, stopsi[k]);
                 strippaint(stripsd, numstrips);
                 stripselect1(numstr);
-            }
-            else{
+            } else {
                 binding.baseTime.setText("");
-                incre=0;
+                incre = 0;
             }
 
             //binding.textView.setText("x = " + x + "   y = " + y);
@@ -488,7 +488,7 @@ public class MainActivity extends AppCompatActivity {
         toneGen1.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50);
         double ex;
         if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-            if(incre==0) ex = (double) time0 / 1000;
+            if (incre == 0) ex = (double) time0 / 1000;
             else ex = (double) timei / 1000;
             binding.time.setText(String.format(Locale.US, "%05.1f", ex));
             binding.expo.setText(getString(R.string.button));
@@ -696,7 +696,7 @@ public class MainActivity extends AppCompatActivity {
             int deci = Integer.parseInt(expo.substring(4, n));
             time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
             binding.baseTime.setText("");
-            incre=0;
+            incre = 0;
         }
 
         if (!binding.nmode.getText().toString().equals(getResources().getString(R.string.timer)) && !strip1.getText().toString().equals(getString(R.string._000_0))) {
@@ -761,7 +761,7 @@ public class MainActivity extends AppCompatActivity {
                 int deci = Integer.parseInt(expo.substring(4, n));
                 time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 binding.baseTime.setText("");
-                incre=0;
+                incre = 0;
             }
         }
     }
@@ -813,7 +813,7 @@ public class MainActivity extends AppCompatActivity {
                 strip2.setTextColor(0xff000000);
             }
             binding.baseTime.setText("");
-            incre=0;
+            incre = 0;
             return true;
         }
         return false;
@@ -831,16 +831,21 @@ public class MainActivity extends AppCompatActivity {
         int dece = Integer.parseInt(expo.substring(1, 2));
         int unid = Integer.parseInt(expo.substring(2, 3));
         int deci = Integer.parseInt(expo.substring(4, n));
-        String increme="";
+        String increme = "";
 
-        double ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
+        double ex;
+
         if (!binding.time.getText().toString().equals(getString(R.string._000_0))) {
             if (k != paso) {
                 time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 paso = k;
                 incre = 0;
+                timei=0;
             }
             incre = incre + 1;
+
+            if (timei == 0) ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
+            else ex = (double) timei / 1000;
 
             if (incre > 0) increme = "+" + incre + "/" + stopsi[k];
             else if (incre < 0) increme = incre + "/" + stopsi[k];
@@ -850,8 +855,8 @@ public class MainActivity extends AppCompatActivity {
 
             double incr = (double) 1 / stopsi[k];
             ex = ex * Math.pow(2, incr);
-            timei = (long) ((Math.round(ex * 10d) / 10d) * 1000);
-            binding.time.setText(String.format(Locale.US, "%05.1f", ex));
+            timei = (long) ((Math.round(ex * 1000d) / 1000d) * 1000);
+            binding.time.setText(String.format(Locale.US, "%05.1f", (Math.round(ex * 10d) / 10d)));
         }
     }
 
@@ -867,19 +872,23 @@ public class MainActivity extends AppCompatActivity {
             int dece = Integer.parseInt(expo.substring(1, 2));
             int unid = Integer.parseInt(expo.substring(2, 3));
             int deci = Integer.parseInt(expo.substring(4, n));
-            String increme="";
+            String increme = "";
 
-            double ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
+            double ex;
 
-            if (k != paso) {
+             if (k != paso) {
                 time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
                 paso = k;
                 incre = 0;
+                timei=0;
             }
             incre = incre - 1;
 
+            if (timei == 0) ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
+            else ex = (double) timei / 1000;
+
             if (incre > 0) increme = "+" + incre + "/" + stopsi[k];
-            else if(incre <0) increme = incre + "/" + stopsi[k];
+            else if (incre < 0) increme = incre + "/" + stopsi[k];
 
             binding.baseTime.setText(String.format(Locale.US, "%05.1f", (double) time0 / 1000) + " " + increme);
 
@@ -889,12 +898,11 @@ public class MainActivity extends AppCompatActivity {
             BigDecimal bdex = new BigDecimal(ex).setScale(1, RoundingMode.HALF_UP);
             BigDecimal bdex1 = new BigDecimal(ex1).setScale(1, RoundingMode.HALF_UP);
             if (bdex.compareTo(bdex1) != 0) {
-                binding.time.setText(String.format(Locale.US, "%05.1f", ex1));
-                timei = (long) ((Math.round(ex1 * 10d) / 10d)*1000);
-            }
-            else {
+                binding.time.setText(String.format(Locale.US, "%05.1f", (Math.round(ex1 * 10d) / 10d)));
+                timei = (long) ((Math.round(ex1 * 1000d) / 1000d) * 1000);
+            } else {
                 binding.time.setText(R.string._000_0);
-                timei=0;
+                timei = 0;
             }
         }
     }
@@ -944,7 +952,7 @@ public class MainActivity extends AppCompatActivity {
             binding.baseTime.setVisibility(View.INVISIBLE);
             binding.baseTime.setEnabled(false);
             binding.baseTime.setText("");
-            incre=0;
+            incre = 0;
             binding.method.setEnabled(true);
             binding.nmethod.setEnabled(true);
             binding.method.setTextColor(Color.parseColor("#809B9B9B"));

@@ -29,6 +29,7 @@
     <string name="single">SINGLE</string>
 
     <string-array name="stops">
+        <item>1/1</item>
         <item>1/2</item>
         <item>1/3</item>
         <item>@string/nstops</item>
