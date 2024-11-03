@@ -1,10 +1,15 @@
 package com.ebookfrenzy.disparafilmtimer;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     String memo3 = "0";
     CountDownTimer timer;
     CountDownTimer[] timers = new CountDownTimer[10];
+    Context context =this;
 
     public Boolean Focus = false;
 
@@ -90,12 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Hide system bars
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
-
-        binding.main.setOnTouchListener((v, m) -> {
-                    handleTouch(m);
-                    return true;
-                }
-        );
 
         binding.st1Par.setOnLongClickListener(v -> parTimer(1));
         binding.st2Par.setOnLongClickListener(v -> parTimer(2));
@@ -274,44 +274,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+       boolean conect = connected(context);
+
+        binding.main.setOnTouchListener((v, m) -> {
+                    handleTouch(m);
+                    return true;
+                }
+        );
+
         binding.reset.setOnLongClickListener(v -> erase());
 
         binding.expo.setOnClickListener(v -> {
             String dela = binding.ndelay.getText().toString();
             if (dela.isEmpty()) dela = "0";
             int delay = Integer.parseInt(dela);
+            boolean connect = connected(context);
+            if(connect) {
+                if (!binding.time.getText().toString().equals(getString(R.string._000_0))) {
 
-            if (!binding.time.getText().toString().equals(getString(R.string._000_0))) {
+                    if (!binding.nmethod.getText().toString().equals("AUTO") || binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
+                        String ini = binding.time.getText().toString();
+                        double ex1 = Double.parseDouble(ini) * 1000;
+                        long ex = (int) ex1;
+                        if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
+                            starTimer(ex, getString(R.string.button1), delay);
+                        } else if (binding.expo.getText().equals(getString(R.string.button1))) {
+                            timer.cancel();
+                            paquete();
+                            binding.expo.setText(getString(R.string.button2));
+                            binding.reset.setEnabled(true);
+                        } else if (binding.expo.getText().equals(getString(R.string.button2))) {
+                            starTimer(ex, getString(R.string.button1), delay);
+                        }
+                    } else if (binding.nmethod.getText().toString().equals("AUTO") && !binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
 
-                if (!binding.nmethod.getText().toString().equals("AUTO") || binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-                    String ini = binding.time.getText().toString();
-                    double ex1 = Double.parseDouble(ini) * 1000;
-                    long ex = (int) ex1;
-                    if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
-                        starTimer(ex, getString(R.string.button1), delay);
-                    } else if (binding.expo.getText().equals(getString(R.string.button1))) {
-                        timer.cancel();
-                        paquete();
-                        binding.expo.setText(getString(R.string.button2));
-                        binding.reset.setEnabled(true);
-                    } else if (binding.expo.getText().equals(getString(R.string.button2))) {
-                        starTimer(ex, getString(R.string.button1), delay);
-                    }
-                } else if (binding.nmethod.getText().toString().equals("AUTO") && !binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-
-                    String ini = binding.time.getText().toString();
-                    double ex1 = Double.parseDouble(ini) * 1000;
-                    long ex = (int) ex1;
-                    if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
-                        startimer2(ex, getString(R.string.button1), delay);
-                    } else if (binding.expo.getText().equals(getString(R.string.button1))) {
-                        toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
-                        timers[numstr - 1].cancel();
-                        paquete();
-                        binding.expo.setText(getString(R.string.button2));
-                        binding.reset.setEnabled(true);
-                    } else if (binding.expo.getText().equals(getString(R.string.button2))) {
-                        startimer2(ex, getString(R.string.button1), delay);
+                        String ini = binding.time.getText().toString();
+                        double ex1 = Double.parseDouble(ini) * 1000;
+                        long ex = (int) ex1;
+                        if (binding.expo.getText().equals(getString(R.string.button)) && !binding.time.getText().toString().equals(getString(R.string._000_0))) {
+                            startimer2(ex, getString(R.string.button1), delay);
+                        } else if (binding.expo.getText().equals(getString(R.string.button1))) {
+                            toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
+                            timers[numstr - 1].cancel();
+                            paquete();
+                            binding.expo.setText(getString(R.string.button2));
+                            binding.reset.setEnabled(true);
+                        } else if (binding.expo.getText().equals(getString(R.string.button2))) {
+                            startimer2(ex, getString(R.string.button1), delay);
+                        }
                     }
                 }
             }
@@ -321,10 +331,10 @@ public class MainActivity extends AppCompatActivity {
     void starTimer(long ex, String st, int delay) {
         toneGen1.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 50);
         binding.expo.setText(R.string.wait);
+
         timer = new CountDownTimer(ex, 100) {
             int n;
             long m;
-
             public void onTick(long millisUntilFinished) {
                 binding.time.setText(String.format(Locale.US, "%05.1f", ((double) millisUntilFinished) / 1000));
                 n = n + 1;
@@ -464,39 +474,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void focus(View view) {
-        toneGen1.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50);
-        if (!Focus) {
-            paquete();
-            Focus = true;
-            binding.focus.setTextColor(Color.parseColor("#80FF0000"));
-            binding.expo.setEnabled(false);
-            binding.expo.setTextColor(0xff000000);
-            binding.reset.setEnabled(false);
-            binding.reset.setTextColor(0xff000000);
-        } else {
-            paquete();
-            Focus = false;
-            binding.focus.setTextColor(0xff000000);
-            binding.expo.setEnabled(true);
-            binding.expo.setTextColor(Color.parseColor("#80FF0000"));
-            binding.reset.setEnabled(true);
-            binding.reset.setTextColor(Color.parseColor("#80FF0000"));
+        boolean conect = connected(context);
+        if(conect) {
+            if (!Focus) {
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50);
+                paquete();
+                Focus = true;
+                binding.focus.setTextColor(Color.parseColor("#80FF0000"));
+                binding.expo.setEnabled(false);
+                binding.expo.setTextColor(0xff000000);
+                binding.reset.setEnabled(false);
+                binding.reset.setTextColor(0xff000000);
+            } else {
+                paquete();
+                Focus = false;
+                binding.focus.setTextColor(0xff000000);
+                binding.expo.setEnabled(true);
+                binding.expo.setTextColor(Color.parseColor("#80FF0000"));
+                binding.reset.setEnabled(true);
+                binding.reset.setTextColor(Color.parseColor("#80FF0000"));
+            }
         }
     }
 
     public void reset(View view) {
-        toneGen1.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50);
         double ex;
-        if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-            if (incre == 0) ex = (double) time0 / 1000;
-            else ex = (double) timei / 1000;
-            binding.time.setText(String.format(Locale.US, "%05.1f", ex));
-            binding.expo.setText(getString(R.string.button));
-            binding.focus.setEnabled(true);
-        } else {
-            stripselect1(1);
-            binding.expo.setText(getString(R.string.button));
-            binding.focus.setEnabled(true);
+        boolean conect = connected(context);
+        if(conect) {
+            toneGen1.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50);
+            if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
+                if (incre == 0) ex = (double) time0 / 1000;
+                else ex = (double) timei / 1000;
+                binding.time.setText(String.format(Locale.US, "%05.1f", ex));
+                binding.expo.setText(getString(R.string.button));
+                binding.focus.setEnabled(true);
+            } else {
+                stripselect1(1);
+                binding.expo.setText(getString(R.string.button));
+                binding.focus.setEnabled(true);
+            }
         }
     }
 
@@ -1101,5 +1117,18 @@ public class MainActivity extends AppCompatActivity {
                 };
             }
         }
+    }
+
+    boolean connected(Context context) {
+        AlertDialog.Builder sinconexion = new AlertDialog.Builder(context,R.style.MyDialog);
+        sinconexion.setTitle(R.string.noconnect);
+        sinconexion.setMessage(R.string.noconnect_text);
+        sinconexion.setNeutralButton(R.string.noconnect_bu, (dialog, id) -> {});
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network activeNetwork = cm.getActiveNetwork();
+        NetworkCapabilities capabilities = cm.getNetworkCapabilities(activeNetwork);
+        boolean con = capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+        if (!con) sinconexion.show();
+        return con;
     }
 }

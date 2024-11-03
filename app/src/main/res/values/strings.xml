@@ -27,6 +27,9 @@
     <string name="automatic">AUTO</string>
     <string name="manual">MANU</string>
     <string name="single">SINGLE</string>
+    <string name="noconnect">NO CONNECTION</string>
+    <string name="noconnect_text">NO WIFI CONNECTION DETECTED. PLEASE CONNECT TO DISPARATIMER NETWORK.</string>
+    <string name="noconnect_bu" translatable="false">OK</string>
 
     <string-array name="stops">
         <item>1/1</item>
