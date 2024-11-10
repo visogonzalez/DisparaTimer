@@ -23,7 +23,11 @@ def ap_mode(ssid, password):
 
         Returns: Nada
     """
-    # Just making our internet connection
+    # Disabling WiFI station interface, otherwise AP mode doesn't work
+    sta_if = network.WLAN(network.STA_IF)
+    sta_if.active(False)
+    
+    # Now making our WiFi AP
     ap = network.WLAN(network.AP_IF)
     ap.config(essid=ssid, password=password, pm = 0x111022)
     ap.active(True)
@@ -38,6 +42,8 @@ def ap_mode(ssid, password):
 
     while True:
       data, addre = s2.recvfrom(1024)
+      #print('Got a connection from %s' % str(addre))
+      #print('Content = %s' % str(data))
       r1.toggle()
       r2.toggle()
 

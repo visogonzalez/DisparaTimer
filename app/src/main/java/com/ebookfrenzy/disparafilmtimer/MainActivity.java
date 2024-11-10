@@ -499,8 +499,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void reset(View view) {
         double ex;
-        boolean conect = connected(context);
-        if(conect) {
             toneGen1.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50);
             if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
                 if (incre == 0) ex = (double) time0 / 1000;
@@ -513,7 +511,6 @@ public class MainActivity extends AppCompatActivity {
                 binding.expo.setText(getString(R.string.button));
                 binding.focus.setEnabled(true);
             }
-        }
     }
 
     InetAddress IP() {
