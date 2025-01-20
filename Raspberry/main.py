@@ -24,11 +24,11 @@ def ap_mode(ssid, password):
         Returns: Nada
     """
     # Disabling WiFI station interface, otherwise AP mode doesn't work
-    sta_if = network.WLAN(network.STA_IF)
-    sta_if.active(False)
-    
+   
     # Now making our WiFi AP
     ap = network.WLAN(network.AP_IF)
+    sta_if = network.WLAN(network.STA_IF)
+    sta_if.active(False)
     ap.config(essid=ssid, password=password, pm = 0x111022)
     ap.active(True)
 
@@ -38,7 +38,7 @@ def ap_mode(ssid, password):
     print('IP Address To Connect to:: ' + ap.ifconfig()[0])
 
     s2 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s2.bind(('', 5005))
+    s2.bind(('0.0.0.0', 5005))
 
     while True:
       data, addre = s2.recvfrom(1024)
