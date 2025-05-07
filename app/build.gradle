@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.ebookfrenzy.disparafilmtimer'
-    compileSdk 34
+    compileSdk 35
 
     dataBinding {
         enabled = true
