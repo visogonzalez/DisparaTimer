@@ -8,31 +8,29 @@ import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.ConnectivityManager;
+import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.RouteInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.net.wifi.WifiManager;
-import android.net.DhcpInfo;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.UnknownHostException;
 import java.net.InetAddress;
 import java.io.IOException;
 import java.nio.channels.DatagramChannel;
-import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.Locale;
-import java.math.BigInteger;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -368,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        new Handler().postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             binding.expo.setText(R.string.button1);
             paquete();
             timer.start();
@@ -514,29 +512,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     InetAddress IP() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network activeNetwork = connectivityManager.getActiveNetwork();
 
-        WifiManager wifiManager;
-
-        {
-            getApplicationContext();
-            wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-        }
-
-        DhcpInfo d = wifiManager.getDhcpInfo();
-        int IpInt = d.gateway;
-        IpInt = (ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)) ?
-                Integer.reverseBytes(IpInt) : IpInt;
-        byte[] ipAddress = BigInteger.valueOf(IpInt).toByteArray();
-        InetAddress myaddr;
-        {
-            try {
-                myaddr = InetAddress.getByAddress(ipAddress);
-            } catch (UnknownHostException e) {
-                throw new RuntimeException(e);
+        if (activeNetwork != null) {
+            LinkProperties linkProperties = connectivityManager.getLinkProperties(activeNetwork);
+            if (linkProperties != null) {
+                // Iterate through the routes to find the default one.
+                // The gateway of the default route is what we're looking for.
+                for (RouteInfo route : linkProperties.getRoutes()) {
+                    if (route.isDefaultRoute()) {
+                        return route.getGateway();
+                    }
+                }
             }
         }
-
-        return myaddr;
+        // Return null if no gateway is found, so it can be handled gracefully.
+        return null;
     }
 
     void paquete() {
@@ -1066,7 +1058,7 @@ public class MainActivity extends AppCompatActivity {
                         if (Integer.parseInt(ii) + 1 <= numstrips - 1) {
                             binding.expo.setText(R.string.wait);
                             stripselect1(Integer.parseInt(ii) + 2);
-                            new Handler().postDelayed(() -> {
+                            new Handler(Looper.getMainLooper()).postDelayed(() -> {
                                 binding.expo.setText(getString(R.string.button1));
                                 paquete();
                                 timers[Integer.parseInt(ii) + 1].start();
@@ -1080,7 +1072,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 };
-                new Handler().postDelayed(() -> {
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     paquete();
                     binding.expo.setText(st);
                     timers[0].start();
@@ -1097,7 +1089,7 @@ public class MainActivity extends AppCompatActivity {
                         if (Integer.parseInt(ii) + 1 <= numstrips - 1) {
                             binding.expo.setText(R.string.wait);
                             stripselect1(Integer.parseInt(ii) + 2);
-                            new Handler().postDelayed(() -> {
+                            new Handler(Looper.getMainLooper()).postDelayed(() -> {
                                 binding.expo.setText(getString(R.string.button1));
                                 paquete();
                                 binding.expo.setText(st);

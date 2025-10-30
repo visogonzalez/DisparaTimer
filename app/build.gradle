@@ -3,8 +3,8 @@ plugins {
 }
 
 android {
-    namespace 'com.ebookfrenzy.disparafilmtimer'
-    compileSdk 35
+    namespace = 'com.ebookfrenzy.disparafilmtimer'
+    compileSdk = 36
 
     dataBinding {
         enabled = true
@@ -13,15 +13,11 @@ android {
     defaultConfig {
         applicationId "com.ebookfrenzy.disparafilmtimer"
         minSdk 26
-        targetSdk 34
-        versionCode 5
-        versionName "1.0.4"
+        targetSdk 36
+        versionCode 6
+        versionName "1.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures{
-        viewBinding true
     }
 
     buildTypes {
@@ -33,6 +29,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
+    }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:deprecation"
     }
     //buildToolsVersion '34.0.0'
 }
