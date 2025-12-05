@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                 strip1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 * factor));
                 strip2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (24.0 * factor));
             } else {
-                strip0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 * factor));
+                strip0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (20.0 * factor));
                 strip1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 * factor));
                 strip2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, (float) (34.0 * factor));
             }
@@ -327,7 +327,6 @@ public class MainActivity extends AppCompatActivity {
                             starTimer(ex, getString(R.string.button1), delay);
                         }
                     } else if (binding.nmethod.getText().toString().equals("AUTO") && !binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
-
                         String ini = binding.time.getText().toString();
                         double ex1 = Double.parseDouble(ini) * 1000;
                         long ex = (int) ex1;
@@ -400,10 +399,10 @@ public class MainActivity extends AppCompatActivity {
 
     void handleTouch(MotionEvent m) {
         int pointerCount = m.getPointerCount();
-        String strips = binding.numstrips.getText().toString();
-        int numstrips = Integer.parseInt(strips);
-        String[] stops = getResources().getStringArray(R.array.stops);
-        int k = Arrays.asList(stops).indexOf(binding.numstops.getText().toString());
+        //String strips = binding.numstrips.getText().toString();
+        //int numstrips = Integer.parseInt(strips);
+        //String[] stops = getResources().getStringArray(R.array.stops);
+        //int k = Arrays.asList(stops).indexOf(binding.numstops.getText().toString());
 
         String expo = binding.time.getText().toString();
         int n = expo.length();
@@ -478,13 +477,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            binding.time.setText(String.format(Locale.US, "%05.1f", ex));
-            if (!binding.nmode.getText().toString().equals(getResources().getString(R.string.timer)) && x > ce - (460 * factor * metrics.densityDpi / 440) && y <= bot) {
-                numstr = 1;
-                stripsd = stripcount(ex, numstrips, stopsi[k]);
-                strippaint(stripsd, numstrips);
-                stripselect1(numstr);
-            } else {
+            if (binding.nmode.getText().toString().equals(getResources().getString(R.string.timer))) {
+                binding.time.setText(String.format(Locale.US, "%05.1f", ex));
                 binding.baseTime.setText("");
                 incre = 0;
             }
@@ -571,11 +565,13 @@ public class MainActivity extends AppCompatActivity {
 
     public double[] stripcount(double ex, int k, int kk) {
         double[] stripsd = new double[10];
-        for (int i = 0; i <= k - 1; i++) {
+        int j=0;
+        for (int i = -(k-1)/2; i <= (k-1)/2; i++) {
             double expo = (double) i / kk;
-            stripsd[i] = ex * Math.pow(2, expo);
+            stripsd[j] = ex * Math.pow(2, expo);
+            j=j+1;
         }
-        for (int i = k; i < 10; i++) {
+        for (int i = j; i < 10; i++) {
             stripsd[i] = 0.0;
         }
         return stripsd;
@@ -584,26 +580,34 @@ public class MainActivity extends AppCompatActivity {
     public void strippaint(double[] stripsd, int numstrips) {
         TableLayout tblLayout = binding.tableStrips;
         String method = binding.nmethod.getText().toString();
+        int j=1;
         if (!method.equals(getResources().getString(R.string.single))) {
-            for (int i = 1; i <= numstrips; i++) {
-                TableRow row = (TableRow) tblLayout.getChildAt(i);
+            for (int i = -(numstrips-1)/2; i <= (numstrips-1)/2; i++) {
+                TableRow row = (TableRow) tblLayout.getChildAt(j);
+                TextView strip0 = (TextView) row.getChildAt(0);
                 TextView strip1 = (TextView) row.getChildAt(1);
                 TextView strip2 = (TextView) row.getChildAt(2);
 
-                if (i == 1) strip1.setText(String.format(Locale.US, "%05.1f", stripsd[0]));
+                strip0.setText(i +"/"+binding.numstops.getText().toString().charAt(2));
+
+                if (j == 1) strip1.setText(String.format(Locale.US, "%05.1f", stripsd[0]));
                 else {
-                    double ex1 = stripsd[i - 1] - stripsd[i - 2];
+                    double ex1 = stripsd[j - 1] - stripsd[j - 2];
                     strip1.setText(String.format(Locale.US, "%05.1f", ex1));
 
                 }
-                strip2.setText(String.format(Locale.US, "%05.1f", stripsd[i - 1]));
+                strip2.setText(String.format(Locale.US, "%05.1f", stripsd[j - 1]));
                 strip1.setTextColor(Color.parseColor("#80FF0000"));
                 strip2.setTextColor(Color.parseColor("#80FF0000"));
+
+                j=j+1;
             }
-            for (int i = numstrips + 1; i < 11; i++) {
+            for (int i = j; i < 11; i++) {
                 TableRow row = (TableRow) tblLayout.getChildAt(i);
+                TextView strip0 = (TextView) row.getChildAt(0);
                 TextView strip1 = (TextView) row.getChildAt(1);
                 TextView strip2 = (TextView) row.getChildAt(2);
+                strip0.setText("");
                 strip1.setText(getString(R.string._000_0));
                 strip2.setText(getString(R.string._000_0));
                 strip1.setTextColor(0xff000000);
@@ -644,8 +648,8 @@ public class MainActivity extends AppCompatActivity {
             String[] stops = getResources().getStringArray(R.array.stops);
             int k = Arrays.asList(stops).indexOf(binding.numstops.getText().toString());
 
-            if (numstrips < 10) numstrips = numstrips + 1;
-            else numstrips = 2;
+            if (numstrips < 9) numstrips = numstrips + 2;
+            else numstrips = 3;
             binding.numstrips.setText(String.valueOf(numstrips));
             stripsd = stripcount(ex, numstrips, stopsi[k]);
             strippaint(stripsd, numstrips);
@@ -715,13 +719,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (!strip1.getText().toString().isEmpty() && !strip1.getText().toString().equals(getString(R.string._000_0))) {
             binding.time.setText(strip1.getText());
-            String expo = binding.time.getText().toString();
-            int n = expo.length();
-            int cent = Integer.parseInt(expo.substring(0, 1));
-            int dece = Integer.parseInt(expo.substring(1, 2));
-            int unid = Integer.parseInt(expo.substring(2, 3));
-            int deci = Integer.parseInt(expo.substring(4, n));
-            time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
+            //String expo = binding.time.getText().toString();
+            //int n = expo.length();
+            //int cent = Integer.parseInt(expo.substring(0, 1));
+            //int dece = Integer.parseInt(expo.substring(1, 2));
+            //int unid = Integer.parseInt(expo.substring(2, 3));
+            //int deci = Integer.parseInt(expo.substring(4, n));
+            //time0 = cent * 100000L + dece * 10000L + unid * 1000L + deci * 100L;
             binding.baseTime.setText("");
             incre = 0;
         }
@@ -961,12 +965,12 @@ public class MainActivity extends AppCompatActivity {
             else binding.ndelay.setText(memo3);
 
             numstr = 1;
-            int cent = Integer.parseInt(expo.substring(0, 1));
-            int dece = Integer.parseInt(expo.substring(1, 2));
-            int unid = Integer.parseInt(expo.substring(2, 3));
-            int deci = Integer.parseInt(expo.substring(4, n));
+          //  int cent = Integer.parseInt(expo.substring(0, 1));
+          //  int dece = Integer.parseInt(expo.substring(1, 2));
+          //  int unid = Integer.parseInt(expo.substring(2, 3));
+          //  int deci = Integer.parseInt(expo.substring(4, n));
 
-            double ex = cent * 100 + dece * 10 + unid + (double) deci / 10;
+            double ex = (double) time0/1000;
 
             binding.nmode.setText(getResources().getString(R.string.strip));
             binding.stTotal.setText(R.string.total);
@@ -1014,6 +1018,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView strip1 = (TextView) row.getChildAt(1);
                 TextView strip2 = (TextView) row.getChildAt(2);
                 row.setBackgroundColor(0xff000000);
+                strip0.setText(String.valueOf(i));
                 strip0.setTextColor(Color.parseColor("#80FF0000"));
                 strip1.setText(memo[i - 1]);
                 strip2.setClickable(true);
@@ -1023,7 +1028,7 @@ public class MainActivity extends AppCompatActivity {
                 } else strip1.setTextColor(Color.parseColor("#80FF0000"));
                 if (!strip2.getText().toString().equals(getResources().getString(R.string._000_0))) {
                     strip2.setTextColor(Color.parseColor("#80FF0000"));
-                    if (i == numstr) {
+                    if (i == (numstrips+1)/2) {
                         binding.time.setText(strip2.getText());
                         expo = binding.time.getText().toString();
                         n = expo.length();

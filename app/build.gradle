@@ -14,8 +14,8 @@ android {
         applicationId "com.ebookfrenzy.disparafilmtimer"
         minSdk 26
         targetSdk 36
-        versionCode 6
-        versionName "1.0.5"
+        versionCode 10
+        versionName "1.0.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,8 +31,8 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint:deprecation"
+    tasks.withType(JavaCompile){
+            options.compilerArgs << "-Xlint:deprecation"
     }
     //buildToolsVersion '34.0.0'
 }

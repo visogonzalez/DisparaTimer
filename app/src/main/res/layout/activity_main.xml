@@ -128,11 +128,10 @@
                     android:id="@+id/st11"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="1"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st1Par"
@@ -172,11 +171,10 @@
                     android:id="@+id/st22"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="2"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st2Par"
@@ -216,11 +214,10 @@
                     android:id="@+id/st33"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="3"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st3Par"
@@ -260,11 +257,10 @@
                     android:id="@+id/st44"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="4"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st4Par"
@@ -304,11 +300,10 @@
                     android:id="@+id/st55"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="5"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st5Par"
@@ -348,11 +343,10 @@
                     android:id="@+id/st66"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="6"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st6Par"
@@ -393,11 +387,10 @@
                     android:id="@+id/st77"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="7"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st7Par"
@@ -437,11 +430,10 @@
                     android:id="@+id/st88"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="8"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st8Par"
@@ -481,11 +473,10 @@
                     android:id="@+id/st99"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="9"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st9Par"
@@ -525,11 +516,10 @@
                     android:id="@+id/st100"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:fontFamily="@font/g7_segment_7a"
                     android:gravity="center"
                     android:text="10"
                     android:textColor="#80FF0000"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:id="@+id/st10Par"
@@ -582,7 +572,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:onClick="stripClick"
-            android:text="@string/_2"
+            android:text="@string/_5"
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/strips"
